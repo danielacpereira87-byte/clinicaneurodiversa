@@ -764,8 +764,6 @@ function toast(msg,tipo){
 
 /* --- BOOT --- */
 document.addEventListener('DOMContentLoaded', function() {
-  // Forçar login a aparecer imediatamente
-  mostrarLogin();
   // Mostrar login imediatamente
   mostrarLogin();
   getSB().auth.onAuthStateChange(function(event, session) {
