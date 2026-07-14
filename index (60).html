@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurodiversa — Sistema Clínico</title>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.x/dist/tabler-icons.min.css">
+
+<meta name="robots" content="noindex,nofollow">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --az:#2563A8;--az2:#1A4A7A;--azc:#EBF4FF;
+  --ro:#C85B82;--roc:#FDE8EF;--rom:#E0779A;
+  --vd:#0F6E56;--vdc:#D1F0E8;
+  --am:#D97706;--amc:#FEF3C7;
+  --vm:#E05050;--vmc:#FDECEA;
+  --br:#fff;--cr:#FAFAF8;--tx:#1A202C;--mt:#647585;
+  --bd:#E8EFF5;--bd2:#D0DCE8;--bg:#F4F7FA;
+  --fn:'Plus Jakarta Sans',sans-serif;
+}
+html,body{height:100%;font-family:var(--fn);font-size:13px;color:var(--tx);background:var(--bg);}
+.app{display:grid;grid-template-columns:210px 1fr;height:100vh;overflow:hidden;}
+.sidebar{background:#0D1A2B;display:flex;flex-direction:column;}
+.sb-brand{padding:18px 16px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sb-logo{display:flex;align-items:center;gap:10px;}
+.sb-ic{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--az),var(--ro));display:flex;align-items:center;justify-content:center;font-size:16px;}
+.sb-nm{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:#fff;}
+.sb-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px;}
+.sb-nav{flex:1;overflow-y:auto;padding:10px 0;}
+.sb-sec{font-size:10px;color:rgba(255,255,255,.28);padding:12px 16px 4px;letter-spacing:.9px;}
+.sb-it{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:rgba(255,255,255,.52);cursor:pointer;transition:all .15s;border-left:3px solid transparent;}
+.sb-it:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.82);}
+.sb-it.on{background:rgba(37,99,168,.22);color:#fff;border-left-color:#4A90D9;font-weight:500;}
+.sb-it i{font-size:15px;flex-shrink:0;}
+.sb-bot{padding:12px 16px;border-top:1px solid rgba(255,255,255,.07);}
+.sb-usr{display:flex;align-items:center;gap:9px;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--az),var(--ro));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0;}
+.sb-un{font-size:12px;font-weight:500;color:#fff;}
+.sb-ur{font-size:10px;color:rgba(255,255,255,.38);}
+.main{display:flex;flex-direction:column;overflow:hidden;}
+.tb{background:#fff;border-bottom:1px solid var(--bd);padding:0 22px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.tb-t{font-size:15px;font-weight:500;color:var(--tx);}
+.tb-s{font-size:11px;color:var(--mt);margin-top:2px;}
+.tb-r{display:flex;gap:8px;align-items:center;}
+.ct{flex:1;overflow-y:auto;padding:20px;}
+.btn{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--fn);border:none;transition:all .15s;white-space:nowrap;}
+.bp{background:var(--az);color:#fff;}.bp:hover{background:var(--az2);}
+.bs{background:var(--vd);color:#fff;}.bs:hover{background:#0a5240;}
+.bo{background:#fff;border:1px solid var(--bd2);color:var(--tx);}.bo:hover{background:var(--bg);}
+.bg2{background:transparent;color:var(--mt);border:none;padding:5px 9px;}.bg2:hover{background:var(--bg);}
+.card{background:#fff;border:1px solid var(--bd);border-radius:11px;padding:16px;}
+.ct2{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;}
+.tb2{background:var(--azc);color:var(--az2);}
+.tp{background:var(--roc);color:#7A2040;}
+.tg{background:var(--vdc);color:#0a5240;}
+.ty{background:var(--amc);color:#633806;}
+.tr{background:var(--vmc);color:#7A1B1B;}
+.tgr{background:var(--bg);color:var(--mt);}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:11px;color:var(--mt);font-weight:500;}
+.fld input,.fld select,.fld textarea{background:var(--bg);border:1px solid var(--bd);border-radius:7px;padding:7px 10px;font-size:12px;color:var(--tx);font-family:var(--fn);outline:none;width:100%;transition:border .15s;}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--az);background:#fff;}
+.fld textarea{resize:vertical;min-height:60px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.ff{grid-column:1/-1;}
+.chp{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--bd);background:var(--bg);color:var(--mt);cursor:pointer;transition:all .15s;user-select:none;}
+.chp.on{background:var(--azc);color:var(--az2);border-color:var(--az);}
+.chp.wy{background:var(--amc);color:var(--am);border-color:var(--am);}
+.chp.wr{background:var(--vmc);color:var(--vm);border-color:var(--vm);}
+.chp-g{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
+.pb{height:5px;background:var(--bd);border-radius:3px;overflow:hidden;}
+.pf{height:100%;border-radius:3px;transition:width .4s;}
+.ps{background:#fff;border-bottom:1px solid var(--bd);padding:11px 22px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.pa{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;background:var(--azc);color:var(--az2);}
+.pnm{font-size:14px;font-weight:500;color:var(--tx);}
+.pmt{font-size:11px;color:var(--mt);margin-top:2px;}
+.vtabs{display:flex;background:#fff;border-bottom:1px solid var(--bd);padding:0 22px;flex-shrink:0;}
+.vt{padding:11px 14px;font-size:12px;cursor:pointer;color:var(--mt);border-bottom:2px solid transparent;white-space:nowrap;font-family:var(--fn);background:none;border-top:none;border-left:none;border-right:none;transition:all .15s;}
+.vt.on{color:var(--az);border-bottom-color:var(--az);font-weight:500;}
+.view{display:none;flex-direction:column;height:100%;overflow-y:auto;}
+.view.on{display:flex;}
+.ai{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--bd);}
+.ai:last-child{border-bottom:none;}
+.ad{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.ali{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--bd);}
+.ali:last-child{border-bottom:none;}
+.alic{width:27px;height:27px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.aw{background:var(--amc);color:var(--am);}
+.ad2{background:var(--vmc);color:var(--vm);}
+.ai2{background:var(--azc);color:var(--az);}
+.sb2{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap;}
+.ok{background:var(--vdc);color:#0a5240;}
+.pd{background:var(--amc);color:#633806;}
+.fl{background:var(--vmc);color:#7A1B1B;}
+.tk{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd);cursor:pointer;}
+.tk:last-child{border-bottom:none;}
+.tkc{width:15px;height:15px;border-radius:4px;border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.tkc.dn{background:var(--vdc);border-color:var(--vd);}
+.tkt{font-size:12px;color:var(--tx);}
+.tkt.dn{text-decoration:line-through;color:var(--mt);}
+.sep{height:1px;background:var(--bd);margin:12px 0;}
+.dc{background:#fff;border:1px solid var(--bd);border-radius:10px;margin-bottom:10px;overflow:hidden;}
+.dch{padding:11px 14px;display:flex;align-items:center;gap:9px;cursor:pointer;transition:background .15s;}
+.dch:hover{background:var(--bg);}
+.dcb{display:none;border-top:1px solid var(--bd);}
+.dc.op .dcb{display:block;}
+.dc.op .dchv{transform:rotate(180deg);}
+.dchv{font-size:13px;color:var(--mt);transition:transform .2s;}
+.ir{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--bd);}
+.ir:last-child{border-bottom:none;}
+.sc2{width:30px;height:30px;border-radius:7px;border:1px solid var(--bd);background:var(--bg);font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:var(--fn);}
+.sc2.s0.ac{background:#F7C1C1;color:#791F1F;border-color:#F09595;}
+.sc2.s1.ac{background:var(--amc);color:#633806;border-color:var(--am);}
+.sc2.s2.ac{background:#C0DD97;color:#27500A;border-color:#97C459;}
+.sc2.sn.ac{background:var(--bg);color:var(--mt);}
+.mc{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:13px;margin-bottom:9px;cursor:pointer;transition:all .2s;}
+.mc:hover{border-color:var(--az);box-shadow:0 4px 14px rgba(37,99,168,.08);}
+.mc.sel{border-color:var(--az);background:var(--azc);}
+.mc.sug{border-left:3px solid var(--am);}
+.mcc{width:17px;height:17px;border-radius:5px;border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s;}
+.mc.sel .mcc{background:var(--az);border-color:var(--az);}
+.tn{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd);}
+.tn:last-child{border-bottom:none;}
+.tnd{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.gb{background:var(--bg);border-radius:9px;padding:13px;margin-bottom:9px;border-left:3px solid var(--bd);}
+.gb.al{border-left-color:var(--vm);}
+.gb.me{border-left-color:var(--am);}
+.gb.mn{border-left-color:var(--vd);}
+.gbt{width:100%;border-collapse:collapse;font-size:11px;margin-top:7px;}
+.gbt th{background:#fff;padding:4px 7px;text-align:left;font-weight:500;color:var(--mt);border:1px solid var(--bd);}
+.gbt td{padding:4px 7px;border:1px solid var(--bd);color:var(--tx);vertical-align:top;}
+.tb3{font-size:12px;padding:4px 11px;border-radius:8px;border:1px solid var(--bd2);background:var(--bg);color:var(--mt);cursor:pointer;font-family:var(--fn);transition:all .15s;}
+.tb3.on{background:var(--azc);color:var(--az);border-color:var(--az);}
+.tent-btn{width:100%;aspect-ratio:1;border-radius:6px;border:1px solid var(--bd);background:var(--bg);font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:var(--fn);}
+.tent-btn.A{background:#C8EAD1;border-color:#5BAB7A;color:#1A5C35;}
+.tent-btn.E{background:var(--vmc);border-color:var(--vm);color:#7A1B1B;}
+.tent-btn.P{background:var(--amc);border-color:var(--am);color:#633806;}
+.tent-btn.N{background:var(--bg);border-color:var(--bd2);color:var(--mt);}
+.sf{background:#fff;border:1px solid var(--bd);border-radius:7px;height:62px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mt);cursor:pointer;transition:all .15s;}
+.sf:hover{border-color:var(--az);background:var(--azc);}
+.sf.ok{background:var(--vdc);border-color:var(--vd);border-style:solid;color:var(--vd);}
+.up{border:1px dashed var(--bd2);border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:all .15s;}
+.up:hover{border-color:var(--az);background:var(--azc);}
+.cal-wr{overflow:auto;flex:1;}
+.cal-hd{display:grid;grid-template-columns:50px repeat(5,1fr);background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5;}
+.cal-dhd{padding:9px 6px;text-align:center;border-right:1px solid var(--bd);}
+.cal-dow{font-size:10px;color:var(--mt);}
+.cal-dn{font-size:18px;font-weight:500;color:var(--tx);line-height:1;}
+.cal-dhd.td .cal-dn{background:var(--az);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;}
+.cal-rows{display:grid;grid-template-columns:50px repeat(5,1fr);}
+.cal-tc{border-right:1px solid var(--bd);}
+.cal-ts{height:50px;display:flex;align-items:flex-start;justify-content:flex-end;padding:3px 5px 0;font-size:10px;color:var(--mt);border-bottom:1px solid var(--bd);}
+.cal-dc{border-right:1px solid var(--bd);position:relative;}
+.cal-sl{height:50px;border-bottom:1px solid var(--bd);cursor:pointer;}
+.cal-sl:hover{background:var(--azc);}
+.cal-ev{position:absolute;left:2px;right:2px;border-radius:5px;padding:3px 6px;cursor:pointer;overflow:hidden;z-index:2;}
+.cal-ev:hover{opacity:.82;z-index:4;}
+.evn{font-size:11px;font-weight:500;line-height:1.2;}
+.eve{font-size:10px;opacity:.82;}
+.evt{font-size:10px;opacity:.72;}
+.ef{background:#B5D4F4;color:#0C447C;}
+.eto{background:#9FE1CB;color:#085041;}
+.eab{background:#F4C0D1;color:#72243E;}
+.en{background:#CECBF6;color:#3C3489;}
+.eco{background:#FAC775;color:#633806;}
+.ebl{background:var(--bg);color:var(--mt);border:1px dashed var(--bd);}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.38);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(2px);}
+.mb{background:#fff;border-radius:14px;padding:22px;width:420px;max-height:80vh;overflow-y:auto;border:1px solid var(--bd);}
+.mt2{font-size:14px;font-weight:500;color:var(--tx);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px;}
+.sug-box{background:var(--azc);border:1px solid var(--az);border-radius:10px;padding:13px;}
+.sug-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid rgba(37,99,168,.12);}
+.sug-row:last-child{border-bottom:none;}
+.tree-hd{display:flex;align-items:center;gap:8px;padding:8px 13px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
+.tree-hd:hover,.tree-hd.on{background:var(--azc);}
+.tree-hd .tchv{transition:transform .2s;font-size:12px;color:var(--mt);}
+.tree-hd.op .tchv{transform:rotate(90deg);}
+.tree-sub{display:none;background:var(--bg);}
+.tree-hd.op+.tree-sub{display:block;}
+.tree-si{display:flex;align-items:center;gap:8px;padding:7px 13px 7px 27px;cursor:pointer;border-bottom:1px solid var(--bd);font-size:12px;color:var(--mt);transition:background .15s;}
+.tree-si:hover,.tree-si.on{background:var(--azc);color:var(--az);}
+.pei-cov{background:linear-gradient(135deg,var(--azc),var(--roc));border-radius:14px;padding:28px;text-align:center;margin-bottom:14px;}
+.bc-wrap{display:flex;align-items:flex-end;gap:7px;height:90px;}
+.bc-col{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
+.bc-b{width:100%;border-radius:3px 3px 0 0;}
+.bc-v{font-size:10px;color:var(--mt);}
+.bc-l{font-size:10px;color:var(--mt);text-align:center;}
+.sess-c{background:#fff;border:1px solid var(--bd);border-radius:9px;padding:11px;margin-bottom:8px;}
+.sess-p{font-size:19px;font-weight:500;}
+.sess-p.g{color:var(--vd);}
+.sess-p.m{color:var(--am);}
+.sess-p.b{color:var(--vm);}
+.pro-row{display:flex;align-items:center;gap:8px;padding:7px 13px;border-bottom:1px solid var(--bd);}
+.pro-row:last-child{border-bottom:none;}
+.pro-d{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.pro-a{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;}
+.esp-si{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;}
+.esp-si:hover{background:var(--bg);}
+.esp-si.on{background:var(--azc);border-left-color:var(--az);}
+.esp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sel-it{background:var(--bg);border-radius:8px;padding:10px 11px;margin-bottom:7px;position:relative;}
+.sel-rm{position:absolute;top:7px;right:7px;color:var(--mt);cursor:pointer;font-size:13px;}
+.sel-rm:hover{color:var(--vm);}
+@media(max-width:640px){.fr-tabela-desktop{display:none!important}.fr-cards-mobile{display:block!important}}
+</style>
+<style>
+@media print {
+  .sidebar, aside, #pgLoading, .btn, button, .sb-brand { display:none!important; }
+  .app { display:block!important; grid-template-columns:1fr!important; }
+  .view { display:none!important; height:auto!important; overflow:visible!important; }
+  .view.on { display:block!important; }
+  body { background:white!important; }
+}
+</style>
+</head>
+<body>
+
+<div id="pgLoading" style="position:fixed;inset:0;background:#F4F7FA;display:none;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px;">
+  <div style="width:40px;height:40px;border:3px solid #E8EFF5;border-top-color:#2563A8;border-radius:50%;animation:spin .8s linear infinite;"></div>
+  <div style="font-size:12px;color:#647585;font-family:inherit;">Verificando sessao...</div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes lspin{to{transform:rotate(360deg)}}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+
+<div class="app" id="appShell" style="display:none">
+
+<aside class="sidebar">
+  <div class="sb-brand"><div class="sb-logo"><div class="sb-ic">🧠</div><div><div class="sb-nm">neurodiversa</div><div class="sb-sub">sistema clínico</div></div></div></div>
+  <nav class="sb-nav">
+    <div class="sb-it on" onclick="nav('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+    <div class="sb-it" onclick="nav('pacientes')"><i class="ti ti-users"></i> Pacientes</div>
+    <div class="sb-it" onclick="nav('agenda')"><i class="ti ti-calendar"></i> Agenda</div>
+    <div class="sb-it" onclick="nav('prontuario')"><i class="ti ti-notes"></i> Prontuário</div>
+    <div class="sb-sec">clínico</div>
+    <div class="sb-it" onclick="abrirModuloAvaliacao()"><i class="ti ti-clipboard-check"></i> Avaliações</div>
+    <div class="sb-it" onclick="nav('metas')"><i class="ti ti-target"></i> Metas / PEI</div>
+    <div class="sb-it" onclick="abrirFolhaRegistro()"><i class="ti ti-clipboard-list"></i> Folha de Registro</div>
+    <div class="sb-it" onclick="nav('graficos')"><i class="ti ti-chart-line"></i> Gráficos</div>
+    <div class="sb-sec">fase 2</div>
+    <div class="sb-it" onclick="nav('financeiro')"><i class="ti ti-report-money"></i> Financeiro</div>
+    <div class="sb-it" onclick="nav('familia')"><i class="ti ti-device-mobile"></i> App Família</div>
+    <div class="sb-it" onclick="nav('comunicacao')"><i class="ti ti-message-circle"></i> Comunicação</div>
+    <div class="sb-it" onclick="nav('relatorios')"><i class="ti ti-file-analytics"></i> Relatórios</div>
+    <div class="sb-it"><i class="ti ti-settings"></i> Configurações</div>
+  </nav>
+  <div class="sb-bot"><div class="sb-usr"><div class="sb-av">DC</div><div><div class="sb-un">Dani C.</div><div class="sb-ur">Coordenação</div></div></div></div>
+</aside>
+<main class="main" id="main">
+
+<div class="view on" id="v-dashboard">
+  <div class="tb"><div><div class="tb-t"><span id="dashGreet">Bom dia, Dani</span><span style="display:none" id="dashDate"></span> 👋</div><div class="tb-s"><span id="dashDate">Carregando...</span></div></div>
+  <div class="tb-r"><span class="tag tr"><i class="ti ti-alert-triangle" style="font-size:10px"></i> 3 alertas</span><button class="btn bp" onclick="nav('pacientes')"><i class="ti ti-plus"></i> Novo paciente</button></div></div>
+  <div class="ct">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px;">
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">Pacientes ativos</div><div style="font-size:26px;font-weight:500"><span id="stPacientes">—</span></div><div style="font-size:11px;color:var(--vd);margin-top:4px;">↑ +3 este mês</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">Sessões hoje</div><div style="font-size:26px;font-weight:500"><span id="stSessoes">—</span></div><div style="font-size:11px;color:var(--mt);margin-top:4px;">6 confirmadas · 8 pendentes</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">Faltas semana</div><div style="font-size:26px;font-weight:500;color:var(--am)">4</div><div style="font-size:11px;color:var(--mt);margin-top:4px;">2 reposições agendadas</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">PEIs pendentes</div><div style="font-size:26px;font-weight:500;color:var(--am)">7</div><div style="font-size:11px;color:var(--mt);margin-top:4px;">revisão necessária</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div class="card"><div class="ct2">Agenda de hoje <span style="font-size:11px;color:var(--mt);cursor:pointer" onclick="nav('agenda')">ver →</span></div>
+<div id="agendaHoje"><div style="font-size:12px;color:#94A3B8;text-align:center;padding:20px;">Carregando agenda...</div></div>
+</div>
+      <div class="card"><div class="ct2">Alertas clínicos <span style="font-size:11px;color:var(--mt)">3 novos</span></div>
+        <div class="ali"><div class="alic ad2"><i class="ti ti-calendar-off"></i></div><div><div style="font-size:12px;font-weight:500">Lucas R. — 3 faltas consecutivas</div><div style="font-size:11px;color:var(--mt)">Contato com família necessário</div></div></div>
+        <div class="ali"><div class="alic aw"><i class="ti ti-file-alert"></i></div><div><div style="font-size:12px;font-weight:500">PEI de Beatriz S. vence em 5 dias</div><div style="font-size:11px;color:var(--mt)">Revisão e atualização pendente</div></div></div>
+        <div class="ali"><div class="alic aw"><i class="ti ti-chart-line"></i></div><div><div style="font-size:12px;font-weight:500">Meta sem evolução — 3 semanas</div><div style="font-size:11px;color:var(--mt)">Sofia M. · comunicação funcional</div></div></div>
+        <div class="ali"><div class="alic ai2"><i class="ti ti-cake"></i></div><div><div style="font-size:12px;font-weight:500">Aniversário — Pedro A. · 7 anos hoje</div><div style="font-size:11px;color:var(--mt)">Enviar mensagem à família</div></div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+      <div class="card"><div class="ct2">Pacientes do dia</div>
+<div id="pacientesDia"><div style="font-size:12px;color:#94A3B8;text-align:center;padding:14px;">Carregando...</div></div>
+</div>
+      <div class="card"><div class="ct2">Sessões por especialidade</div>
+        <div class="bc-wrap">
+          <div class="bc-col"><div class="bc-v">12</div><div class="bc-b" style="height:100%;background:#B5D4F4;border:1px solid #4A90D9;"></div><div class="bc-l">Fono</div></div>
+          <div class="bc-col"><div class="bc-v">9</div><div class="bc-b" style="height:75%;background:#9FE1CB;border:1px solid #1D9E75;"></div><div class="bc-l">TO</div></div>
+          <div class="bc-col"><div class="bc-v">11</div><div class="bc-b" style="height:92%;background:#F4C0D1;border:1px solid #D4537E;"></div><div class="bc-l">ABA</div></div>
+          <div class="bc-col"><div class="bc-v">6</div><div class="bc-b" style="height:50%;background:#CECBF6;border:1px solid #7F77DD;"></div><div class="bc-l">Neuro</div></div>
+          <div class="bc-col"><div class="bc-v">4</div><div class="bc-b" style="height:33%;background:#FAC775;border:1px solid #BA7517;"></div><div class="bc-l">Coord</div></div>
+        </div>
+        <div style="margin-top:12px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mt);margin-bottom:3px;"><span>Presença</span><span>87%</span></div>
+          <div class="pb"><div class="pf" style="width:87%;background:var(--vd);"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mt);margin-bottom:3px;margin-top:7px;"><span>Evoluções registradas</span><span>72%</span></div>
+          <div class="pb"><div class="pf" style="width:72%;background:var(--az);"></div></div>
+        </div>
+      </div>
+      <div class="card"><div class="ct2">Tarefas</div>
+        <div class="tk" onclick="tk('t1')"><div class="tkc" id="c-t1"></div><span class="tkt" id="x-t1">Revisar PEI de Beatriz S.</span></div>
+        <div class="tk" onclick="tk('t2')"><div class="tkc" id="c-t2"></div><span class="tkt" id="x-t2">Ligar para família de Lucas R.</span></div>
+        <div class="tk" onclick="tk('t3')"><div class="tkc dn" id="c-t3"><i class="ti ti-check" style="font-size:9px;color:var(--vd)"></i></div><span class="tkt dn" id="x-t3">Reunião de equipe — pauta enviada</span></div>
+        <div class="tk" onclick="tk('t4')"><div class="tkc" id="c-t4"></div><span class="tkt" id="x-t4">Atualizar protocolo Denver</span></div>
+        <div class="tk" onclick="tk('t5')"><div class="tkc" id="c-t5"></div><span class="tkt" id="x-t5">Confirmar reposição Pedro A.</span></div>
+        <div class="sep"></div>
+        <div style="font-size:12px;color:var(--am);display:flex;gap:6px;align-items:center;"><i class="ti ti-cake"></i> Pedro A. — 7 anos hoje</div>
+        <div style="font-size:12px;color:var(--am);display:flex;gap:6px;align-items:center;margin-top:5px;"><i class="ti ti-cake"></i> Marina L. — 4 anos amanhã</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="view" id="v-pacientes">
+  <div class="tb">
+    <div><div class="tb-t">Pacientes</div><div class="tb-s" id="pacSubt">Carregando...</div></div>
+    <div class="tb-r">
+      <div style="position:relative;">
+        <i class="ti ti-search" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:13px;"></i>
+        <input id="pacBusca" placeholder="Buscar paciente..." oninput="filtrarPacientes()"
+          style="padding:8px 12px 8px 30px;border:1px solid #E2E8F0;border-radius:8px;font-size:12px;width:210px;outline:none;font-family:inherit;">
+      </div>
+      <button class="btn bp" onclick="abrirModalNovoPaciente()"><i class="ti ti-plus"></i> Novo paciente</button>
+    </div>
+  </div>
+  <div class="ct">
+    <div id="pacLista"></div>
+    <div id="pacVazio" style="display:none;text-align:center;padding:50px 20px;">
+      <div style="font-size:40px;margin-bottom:12px;">🧑‍⚕️</div>
+      <div style="font-size:15px;font-weight:600;color:#27386A;margin-bottom:6px;">Nenhum paciente cadastrado</div>
+      <div style="font-size:12px;color:#64748B;margin-bottom:18px;">Clique em Novo paciente para comecar.</div>
+      <button class="btn bp" onclick="abrirModalNovoPaciente()"><i class="ti ti-plus"></i> Cadastrar primeiro paciente</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-paciente-ficha">
+  <div class="tb">
+    <div><div class="tb-t" id="pfNome">-</div><div class="tb-s" id="pfSubt">-</div></div>
+    <div class="tb-r">
+      <button class="btn bo" onclick="nav('pacientes')"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <button class="btn bp" onclick="abrirModuloAvaliacao()"><i class="ti ti-clipboard-check"></i> Avaliações</button>
+      <button class="btn bo" onclick="abrirPEIPaciente()" style="background:#7C3AED;color:#fff;border-color:#7C3AED;"><i class="ti ti-target"></i> PEI</button>
+      <button class="btn bo" onclick="abrirFolhaRegistroPaciente(PAC.atual&&PAC.atual.id)"><i class="ti ti-clipboard-list"></i> Folha de Registro</button>
+    </div>
+  </div>
+  <div class="ps">
+    <div class="pa" id="pfAvatar">??</div>
+    <div><div class="pnm" id="pfNomeMini">-</div><div class="pmt" id="pfMeta">-</div></div>
+  </div>
+  <div class="vtabs">
+    <button class="vt on" onclick="st('pac','dados',this)">Dados gerais</button>
+    <button class="vt" onclick="st('pac','clinico',this)">Dados clinicos</button>
+    <button class="vt" onclick="st('pac','responsaveis',this)">Responsaveis</button>
+    <button class="vt" onclick="st('pac','equipe',this)">Equipe</button>
+    <button class="vt" onclick="st('pac','documentos',this)">Documentos</button>
+  </div>
+  <div class="ct">
+    <div id="pac-dados">
+      <div class="card" style="margin-bottom:13px;">
+        <div class="ct2"><span><i class="ti ti-user" style="margin-right:5px"></i>Informacoes pessoais</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button></div>
+        <div class="fg2">
+          <div class="fld ff"><label>Nome completo</label><input id="fpNome"></div>
+          <div class="fld"><label>Nome social</label><input id="fpNomeSocial"></div>
+          <div class="fld"><label>Data de nascimento</label><input type="date" id="fpNasc"></div>
+          <div class="fld"><label>Sexo</label><select id="fpSexo"><option value="">Selecione</option><option value="F">Feminino</option><option value="M">Masculino</option><option value="outro">Outro</option></select></div>
+          <div class="fld"><label>CPF</label><input id="fpCPF"></div>
+          <div class="fld"><label>Data de Inicio das Terapias</label><input type="date" id="fpDataInicio"></div>
+          <div class="fld"><label>Data de Saida das Terapias</label><input type="date" id="fpDataSaida"></div>
+          <div class="fld ff"><label>Endereco</label><input id="fpEndereco"></div>
+          <div class="fld"><label>Cidade</label><input id="fpCidade"></div>
+          <div class="fld"><label>CEP</label><input id="fpCEP"></div>
+        </div>
+      </div>
+    </div>
+    <div id="pac-clinico" style="display:none;">
+      <div class="card">
+        <div class="ct2"><span><i class="ti ti-stethoscope" style="margin-right:5px"></i>Diagnostico</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button></div>
+        <div class="fg2">
+          <div class="fld ff"><label>CID</label>
+            <div style="position:relative;">
+              <input id="fpCIDBusca" placeholder="Digite F84 ou Autismo..." autocomplete="off"
+                oninput="cidBuscar(this.value,'fpCIDRes','fpCIDSel')"
+                style="width:100%;border:1.5px solid #CBD5E1;border-radius:8px;padding:8px 11px;font-size:12.5px;outline:none;font-family:inherit;">
+              <div id="fpCIDRes" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #E2E8F0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:999;max-height:200px;overflow-y:auto;"></div>
+            </div>
+            <div id="fpCIDSel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;"></div>
+            <input type="hidden" id="fpCID">
+          </div>
+          <div class="fld ff"><label>Observacoes</label><textarea id="fpDiagObs"></textarea></div>
+          <div class="fld ff"><label>Obs. gerais</label><textarea id="fpObsGerais"></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div id="pac-responsaveis" style="display:none;">
+      <div class="card">
+        <div class="ct2"><span><i class="ti ti-users" style="margin-right:5px"></i>Responsaveis</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="abrirModalResponsavel()"><i class="ti ti-plus"></i> Adicionar</button></div>
+        <div id="pfResponsaveis"><div style="font-size:12px;color:#64748B;text-align:center;padding:14px;">Nenhum responsavel.</div></div>
+        <div class="ct2" style="margin-top:13px;"><span><i class="ti ti-id-badge" style="margin-right:5px"></i>Convenio</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button></div>
+        <div class="fg2">
+          <div class="fld"><label>Operadora</label><input id="fpConvenio"></div>
+          <div class="fld"><label>Numero</label><input id="fpNumConvenio"></div>
+          <div class="fld"><label>Validade</label><input type="date" id="fpValConvenio"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="pac-equipe" style="display:none;">
+      <div class="card" style="margin-bottom:13px;">
+        <div class="ct2">
+          <span><i class="ti ti-users-group" style="margin-right:5px"></i>Equipe Responsavel</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button>
+        </div>
+        <div style="font-size:11.5px;color:#92400e;background:#FEF3C7;border-radius:8px;padding:10px 13px;margin-bottom:12px;">
+          <i class="ti ti-info-circle"></i> Preencha apenas os coordenadores que atendem este paciente.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:14px;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Coordenador</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpCoordABA" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpCoordABAEsp" placeholder="Ex: ABA, Psicologia"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpCoordABACons" placeholder="Ex: CRP 06/12345"></div>
+            </div>
+          </div>
+
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:14px;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Coordenador</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpCoordFono" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpCoordFonoEsp" placeholder="Ex: Fonoaudiologia, TO"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpCoordFonoCons" placeholder="Ex: CREFONO 2/12345"></div>
+            </div>
+          </div>
+
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:14px;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Coordenador</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpCoordTO" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpCoordTOEsp" placeholder="Ex: Terapia Ocupacional"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpCoordTOCons" placeholder="Ex: CREFITO 3/12345"></div>
+            </div>
+          </div>
+
+          <div style="border:1.5px solid #2563A8;border-radius:10px;padding:14px;background:#EEF4FF;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;"><i class="ti ti-shield-check" style="font-size:11px"></i> Supervisor Clinico</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpSupervisor" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpSupervisorEsp" placeholder="Ex: Neuropsicologia"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpSupervisorCons" placeholder="Ex: CRM 06/12345"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid #FEE2E2;">
+        <div class="ct2"><span style="color:#EF4444"><i class="ti ti-alert-triangle" style="margin-right:5px"></i>Zona de Perigo</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;">
+          <div>
+            <div style="font-size:13px;font-weight:500">Excluir cadastro</div>
+            <div style="font-size:12px;color:#64748B">Esta acao e permanente e nao pode ser desfeita.</div>
+          </div>
+          <button class="btn" style="background:#FEF2F2;border:1.5px solid #FECACA;color:#EF4444;" onclick="excluirPaciente()">
+            <i class="ti ti-trash"></i> Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="pac-documentos" style="display:none;">
+      <div class="card" style="margin-bottom:13px;">
+        <div class="ct2"><span><i class="ti ti-paperclip" style="margin-right:5px"></i>Documentos do Paciente</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+          <div class="doc-upload-area" onclick="document.getElementById('uploadCarteirinha').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-id-badge" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Carteirinha do Convenio</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF, JPG ou PNG</div>
+            <div id="nomeCarteirinha" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadCarteirinha" accept=".pdf,.jpg,.jpeg,.png" style="display:none"
+              onchange="uploadDocumento(this,'carteirinha','nomeCarteirinha')">
+          </div>
+          <div class="doc-upload-area" onclick="document.getElementById('uploadLaudo').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-file-text" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Laudo Medico / Diagnostico</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF</div>
+            <div id="nomeLaudo" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadLaudo" accept=".pdf" style="display:none"
+              onchange="uploadDocumento(this,'laudo','nomeLaudo')">
+          </div>
+          <div class="doc-upload-area" onclick="document.getElementById('uploadRelatorio').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-chart-bar" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Relatorio Anterior</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF</div>
+            <div id="nomeRelatorio" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadRelatorio" accept=".pdf" style="display:none"
+              onchange="uploadDocumento(this,'relatorio','nomeRelatorio')">
+          </div>
+          <div class="doc-upload-area" onclick="document.getElementById('uploadOutro').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-file-plus" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Outros Documentos</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF, JPG ou PNG</div>
+            <div id="nomeOutro" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadOutro" accept=".pdf,.jpg,.jpeg,.png" style="display:none"
+              onchange="uploadDocumento(this,'outro','nomeOutro')">
+          </div>
+        </div>
+        <div id="listaDocumentos">
+          <div style="font-size:12px;color:#94A3B8;text-align:center;padding:10px;">Carregando documentos...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-agenda">
+  <div class="tb">
+    <div style="display:flex;align-items:center;gap:11px;"><div><div class="tb-t">Agenda multiprofissional</div></div>
+    <div style="display:flex;align-items:center;gap:5px;"><button class="btn bg2" onclick="wk(-1)"><i class="ti ti-chevron-left"></i></button><span style="font-size:13px;font-weight:500;min-width:165px;text-align:center" id="wl">26 mai — 30 mai 2025</span><button class="btn bg2" onclick="wk(1)"><i class="ti ti-chevron-right"></i></button><button class="btn bo" onclick="wt()" style="font-size:11px;padding:5px 9px;">Hoje</button></div></div>
+    <div class="tb-r"><button class="btn bo"><i class="ti ti-list"></i> Lista de espera</button><button class="btn bp" onclick="om('m-agenda')"><i class="ti ti-plus"></i> Novo agendamento</button></div>
+  </div>
+  <div style="background:#fff;border-bottom:1px solid var(--bd);padding:9px 22px;display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0;">
+    <span style="font-size:11px;color:var(--mt);margin-right:3px;">Filtrar:</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#378ADD;margin-right:3px;"></span>Fono</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#1D9E75;margin-right:3px;"></span>TO</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#D4537E;margin-right:3px;"></span>ABA</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#7F77DD;margin-right:3px;"></span>Neuro</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#BA7517;margin-right:3px;"></span>Coord</span>
+  </div>
+  <div style="display:flex;flex:1;overflow:hidden;">
+    <div style="width:170px;background:#fff;border-right:1px solid var(--bd);overflow-y:auto;padding:12px 0;">
+      <div style="font-size:10px;color:var(--mt);letter-spacing:.8px;padding:0 13px;margin-bottom:9px;">PROFISSIONAIS</div>
+      <div class="pro-row"><div class="pro-d" style="background:#378ADD"></div><div class="pro-a" style="background:#B5D4F4;color:#0C447C;">AL</div><div><div style="font-size:11px;font-weight:500">Dra. Ana Lima</div><div style="font-size:10px;color:var(--mt)">Fonoaudiologia</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#1D9E75"></div><div class="pro-a" style="background:#9FE1CB;color:#085041;">CR</div><div><div style="font-size:11px;font-weight:500">Dr. Carlos R.</div><div style="font-size:10px;color:var(--mt)">T. Ocupacional</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#D4537E"></div><div class="pro-a" style="background:var(--roc);color:#72243E;">PN</div><div><div style="font-size:11px;font-weight:500">Dra. Paula N.</div><div style="font-size:10px;color:var(--mt)">ABA</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#7F77DD"></div><div class="pro-a" style="background:#CECBF6;color:#3C3489;">FM</div><div><div style="font-size:11px;font-weight:500">Dr. Fábio M.</div><div style="font-size:10px;color:var(--mt)">Neuropsico</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#BA7517"></div><div class="pro-a" style="background:var(--amc);color:#633806;">DC</div><div><div style="font-size:11px;font-weight:500">Dani C.</div><div style="font-size:10px;color:var(--mt)">Coordenação</div></div></div>
+    </div>
+    <div class="cal-wr">
+      <div class="cal-hd" id="cal-hd">
+        <div style="border-right:1px solid var(--bd);"></div>
+        <div class="cal-dhd"><div class="cal-dow">SEG</div><div class="cal-dn">26</div></div>
+        <div class="cal-dhd td"><div class="cal-dow" style="color:var(--az)">TER</div><div class="cal-dn">27</div></div>
+        <div class="cal-dhd"><div class="cal-dow">QUA</div><div class="cal-dn">28</div></div>
+        <div class="cal-dhd"><div class="cal-dow">QUI</div><div class="cal-dn">29</div></div>
+        <div class="cal-dhd"><div class="cal-dow">SEX</div><div class="cal-dn">30</div></div>
+      </div>
+      <div class="cal-rows" id="cal-rows"></div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-prontuario">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;text-align:center;padding:20px;">
+    <i class="ti ti-notes-medical" style="font-size:48px;color:#2563A8;margin-bottom:16px;"></i>
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Prontuário</div>
+    <div style="font-size:13px;color:#64748B;max-width:400px;margin-bottom:24px;">
+      Acesse o prontuário completo pela ficha do paciente.<br>
+      Selecione um paciente na lista para ver seus dados, avaliações e registros.
+    </div>
+    <button class="btn bp" onclick="nav('pacientes')">
+      <i class="ti ti-users"></i> Ir para Pacientes
+    </button>
+  </div>
+</div>
+
+<div class="view" id="v-avaliacoes">
+  <!-- CABEÇALHO -->
+  <div class="tb">
+    <div>
+      <div class="tb-t">Avaliações</div>
+      <div class="tb-s" id="avSubt">Selecione um paciente</div>
+    </div>
+    <div class="tb-r">
+      <button class="btn bo" onclick="nav('paciente-ficha')"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <button class="btn bp" id="btnNovaAv" onclick="abrirNovaAvaliacao()" style="display:none"><i class="ti ti-plus"></i> Nova Avaliação</button>
+    </div>
+  </div>
+
+  <!-- LISTA DE AVALIAÇÕES DO PACIENTE -->
+  <div id="avListaView">
+    <div id="avLista" style="padding:16px;">
+      <div style="text-align:center;color:#94A3B8;padding:40px;font-size:13px;">
+        <i class="ti ti-clipboard-list" style="font-size:32px;display:block;margin-bottom:8px;"></i>
+        Nenhuma avaliação encontrada para este paciente.
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SELECIONAR PROTOCOLO -->
+  <div id="avModalProtocolo" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:14px;padding:28px;width:520px;max-width:95vw;max-height:85vh;overflow-y:auto;">
+      <div style="font-size:16px;font-weight:600;margin-bottom:6px;">Nova Avaliação</div>
+      <div style="font-size:12px;color:#64748B;margin-bottom:18px;" id="avModalPacNome">Paciente: —</div>
+      <div style="font-size:11.5px;font-weight:600;color:#374151;margin-bottom:10px;">Selecione um ou mais protocolos para esta avaliação:</div>
+      <div id="avProtocoloLista" style="display:grid;gap:8px;"></div>
+      <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;">
+        <button class="btn bo" onclick="fecharModalProtocolo()">Cancelar</button>
+        <button class="btn bp" onclick="iniciarAvaliacao()"><i class="ti ti-play"></i> Iniciar Avaliação</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA DE APLICAÇÃO DO PROTOCOLO -->
+  <div id="avAplicacaoView" style="display:none;flex:1;overflow:hidden;display:none;flex-direction:column;">
+    <!-- Topo da aplicação -->
+    <div style="background:#fff;border-bottom:1px solid #E2E8F0;padding:12px 20px;display:flex;align-items:center;gap:12px;">
+      <button class="btn bo" style="font-size:11px;" onclick="voltarListaAvaliacoes()"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:600;" id="avAplTitulo">—</div>
+        <div style="font-size:11px;color:#64748B;" id="avAplSubt">—</div>
+      </div>
+      <div style="font-size:11px;color:#64748B;" id="avAplProgresso">Item 0 de 0</div>
+      <button class="btn bp" style="font-size:11px;" onclick="finalizarAvaliacao()"><i class="ti ti-check"></i> Finalizar</button>
+    </div>
+    <!-- Barra de progresso -->
+    <div style="height:4px;background:#E2E8F0;">
+      <div id="avBarraProgresso" style="height:4px;background:#2563A8;width:0%;transition:width .3s;"></div>
+    </div>
+    <!-- Área principal: sidebar domínios + item atual -->
+    <div style="display:flex;flex:1;overflow:hidden;">
+      <!-- Sidebar: domínios -->
+      <div style="width:200px;border-right:1px solid #E2E8F0;overflow-y:auto;background:#F8FAFC;">
+        <div style="padding:10px 12px;font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.8px;text-transform:uppercase;">Domínios</div>
+        <div id="avDominioLista"></div>
+      </div>
+      <!-- Área do item -->
+      <div style="flex:1;overflow-y:auto;padding:24px;">
+        <div id="avItemArea">
+          <div style="text-align:center;color:#94A3B8;padding:40px;">Selecione um domínio para começar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="view" id="v-registro">
+  <div class="tb">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="logo.png" style="height:32px;object-fit:contain;">
+      <div>
+        <div class="tb-t">Folha de Registro</div>
+        <div class="tb-s" id="frSubt">Selecione um paciente para iniciar</div>
+      </div>
+    </div>
+    <div class="tb-r">
+      <button class="btn bo" onclick="nav('pacientes')"><i class="ti ti-arrow-left"></i> Pacientes</button>
+      <button class="btn bp" id="btnNovaSessao" onclick="iniciarNovaSessao()" style="display:none"><i class="ti ti-plus"></i> Nova Sessão</button>
+    </div>
+  </div>
+  <div id="frConteudo">
+    <div style="text-align:center;color:#94A3B8;padding:60px 20px;">
+      <i class="ti ti-clipboard-list" style="font-size:40px;display:block;margin-bottom:12px;"></i>
+      <div style="font-size:14px;font-weight:500;margin-bottom:6px;">Folha de Registro</div>
+      <div style="font-size:12px;">Acesse pelo botão "Folha de Registro" na ficha do paciente</div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-metas">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;text-align:center;padding:20px;">
+    <i class="ti ti-target" style="font-size:48px;color:#2563A8;margin-bottom:16px;"></i>
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Metas e PEI</div>
+    <div style="font-size:13px;color:#64748B;max-width:400px;margin-bottom:24px;">
+      O PEI é gerado automaticamente após finalizar uma avaliação.<br>
+      Acesse a ficha do paciente → Avaliações → selecione uma avaliação finalizada → Resultados → Gerar PEI.
+    </div>
+    <button class="btn bp" onclick="nav('pacientes')">
+      <i class="ti ti-users"></i> Ir para Pacientes
+    </button>
+  </div>
+</div>
+
+<div class="view" id="v-graficos">
+  <div class="tb"><div><div class="tb-t">Folhas de registro e gráficos evolutivos</div><div class="tb-s">Coleta vinculada às metas · visualização de evolução</div></div>
+  <div class="tb-r"><button class="btn bo"><i class="ti ti-download"></i> Exportar</button><button class="btn bp"><i class="ti ti-file-analytics"></i> Relatório evolutivo</button></div></div>
+  <div class="vtabs"><button class="vt on" onclick="st('graf','registro',this)">Folha de registro</button><button class="vt" onclick="st('graf','graficos',this)">Gráficos</button><button class="vt" onclick="st('graf','dashboard',this)">Dashboard clínico</button></div>
+  <div style="display:flex;flex:1;overflow:hidden;">
+    <div style="width:210px;background:#fff;border-right:1px solid var(--bd);overflow-y:auto;padding:11px 0;">
+      <div style="font-size:10px;color:var(--mt);letter-spacing:.8px;padding:0 13px;margin-bottom:8px;">METAS ATIVAS</div>
+      <div style="padding:8px 13px;border-left:3px solid var(--az);background:var(--azc);cursor:pointer;">
+        <div style="font-size:10px;color:var(--mt)">CR-01 · Fono/ABA</div>
+        <div style="font-size:12px;font-weight:500;color:var(--az);margin-top:2px;">Seguir instrução 2 etapas</div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:5px;"><div style="flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;"><div style="width:70%;height:100%;background:var(--az);border-radius:2px;"></div></div><span style="font-size:10px;color:var(--mt)">70%</span></div>
+      </div>
+      <div style="padding:8px 13px;border-left:3px solid transparent;cursor:pointer;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+        <div style="font-size:10px;color:var(--mt)">CE-01 · Fono</div>
+        <div style="font-size:12px;font-weight:500;margin-top:2px;">Combinar 2 palavras CAA</div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:5px;"><div style="flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;"><div style="width:45%;height:100%;background:#D4537E;border-radius:2px;"></div></div><span style="font-size:10px;color:var(--mt)">45%</span></div>
+      </div>
+      <div style="padding:8px 13px;border-left:3px solid transparent;cursor:pointer;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+        <div style="font-size:10px;color:var(--mt)">HS-01 · ABA</div>
+        <div style="font-size:12px;font-weight:500;margin-top:2px;">Contato visual funcional</div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:5px;"><div style="flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;"><div style="width:85%;height:100%;background:#1D9E75;border-radius:2px;"></div></div><span style="font-size:10px;color:var(--mt)">85%</span></div>
+      </div>
+    </div>
+    <div class="ct">
+      <div id="graf-registro">
+        <div class="card" style="margin-bottom:12px;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:11px;">
+            <div><div style="font-size:14px;font-weight:500">CR-01 · Seguir instrução de 2 etapas</div><div style="font-size:11px;color:var(--mt);margin-top:1px;">Fono+ABA · Dra. Ana Lima · 27/05/2025</div></div>
+            <span class="tag ty">Em andamento · 70%</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px;background:var(--bg);border-radius:8px;padding:9px;margin-bottom:13px;">
+            <div><div style="font-size:10px;color:var(--mt)">Sessões</div><div style="font-size:17px;font-weight:500">13</div></div>
+            <div><div style="font-size:10px;color:var(--mt)">Média atual</div><div style="font-size:17px;font-weight:500;color:var(--am)">70%</div></div>
+            <div><div style="font-size:10px;color:var(--mt)">Critério</div><div style="font-size:17px;font-weight:500">80%</div></div>
+            <div><div style="font-size:10px;color:var(--mt)">Tendência</div><div style="font-size:17px;font-weight:500;color:var(--vd)">↑</div></div>
+          </div>
+          <div style="font-size:12px;font-weight:500;margin-bottom:7px;">Sessão atual — 27/05/2025</div>
+          <div style="display:flex;gap:7px;margin-bottom:9px;flex-wrap:wrap;">
+            <span class="tag tg">■ Acerto</span><span class="tag tr">■ Erro</span><span class="tag ty">■ Prompt</span><span class="tag tgr">■ N/A</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-bottom:7px;" id="tent-g"></div>
+          <div style="font-size:11px;color:var(--mt);margin-bottom:13px;">Clique para alternar: vazio → Acerto → Erro → Prompt → N/A</div>
+          <div style="display:flex;justify-content:flex-end;gap:7px;"><button class="btn bo">Cancelar</button><button class="btn bp" onclick="alert('Sessão salva! Gráfico atualizado.')"><i class="ti ti-device-floppy"></i> Salvar sessão</button></div>
+        </div>
+        <div class="sess-c"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;"><div><div style="font-size:12px;font-weight:500">20/05/2025</div><div style="font-size:11px;color:var(--mt)">Dra. Ana Lima</div></div><div class="sess-p g">70%</div></div><div style="font-size:12px;color:var(--mt);line-height:1.7;">Boa sessão. Sofia demonstrou melhora. Prompt gestual em 2 tentativas. Tendência positiva.</div></div>
+        <div class="sess-c"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;"><div><div style="font-size:12px;font-weight:500">13/05/2025</div><div style="font-size:11px;color:var(--mt)">Dra. Ana Lima</div></div><div class="sess-p m">60%</div></div><div style="font-size:12px;color:var(--mt);line-height:1.7;">Resistência inicial. 6 de 10 tentativas. Prompt verbal em 3 ocasiões.</div></div>
+      </div>
+      <div id="graf-graficos" style="display:none;">
+        <div class="card" style="margin-bottom:13px;"><div class="ct2">Evolução — CR-01: Seguir instrução de 2 etapas</div>
+          <div style="font-size:11px;color:var(--mt);margin-bottom:9px;">Porcentagem de acertos · critério 80% (linha verde)</div>
+          <svg viewBox="0 0 540 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:120px;">
+            <line x1="38" y1="10" x2="530" y2="10" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="37" x2="530" y2="37" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="64" x2="530" y2="64" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="91" x2="530" y2="91" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="110" x2="530" y2="110" stroke="var(--bd)" stroke-width="0.5"/>
+            <text x="30" y="13" font-size="9" fill="var(--mt)" text-anchor="end">100%</text><text x="30" y="67" font-size="9" fill="var(--mt)" text-anchor="end">50%</text><text x="30" y="113" font-size="9" fill="var(--mt)" text-anchor="end">0%</text>
+            <line x1="38" y1="24" x2="530" y2="24" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+            <text x="534" y="27" font-size="8" fill="#1D9E75">80%</text>
+            <polyline points="65,92 110,82 155,87 200,73 245,78 290,65 335,59 380,65 425,53 470,47" fill="none" stroke="var(--az)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="65,92 110,82 155,87 200,73 245,78 290,65 335,59 380,65 425,53 470,47 470,110 65,110" fill="var(--az)" opacity="0.07"/>
+            <circle cx="65" cy="92" r="3.5" fill="var(--az)"/><circle cx="110" cy="82" r="3.5" fill="var(--az)"/><circle cx="155" cy="87" r="3.5" fill="var(--az)"/><circle cx="200" cy="73" r="3.5" fill="var(--az)"/><circle cx="245" cy="78" r="3.5" fill="var(--az)"/><circle cx="290" cy="65" r="3.5" fill="var(--az)"/><circle cx="335" cy="59" r="3.5" fill="var(--az)"/><circle cx="380" cy="65" r="3.5" fill="var(--az)"/><circle cx="425" cy="53" r="3.5" fill="var(--az)"/><circle cx="470" cy="47" r="3.5" fill="var(--az)"/>
+            <text x="65" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">mar</text><text x="200" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">abr</text><text x="335" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">mai/1</text><text x="470" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">mai/4</text>
+          </svg>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+          <div class="card"><div class="ct2">Comparativo de metas</div>
+            <div class="bc-wrap">
+              <div class="bc-col"><div class="bc-v">70%</div><div class="bc-b" style="height:82%;background:var(--azc);border:1px solid var(--az);"></div><div class="bc-l">CR-01</div></div>
+              <div class="bc-col"><div class="bc-v">45%</div><div class="bc-b" style="height:53%;background:var(--roc);border:1px solid var(--ro);"></div><div class="bc-l">CE-01</div></div>
+              <div class="bc-col"><div class="bc-v">85%</div><div class="bc-b" style="height:100%;background:var(--vdc);border:1px solid var(--vd);"></div><div class="bc-l">HS-01</div></div>
+              <div class="bc-col"><div class="bc-v">55%</div><div class="bc-b" style="height:65%;background:#EEEDFE;border:1px solid #7F77DD;"></div><div class="bc-l">AUT-01</div></div>
+            </div>
+          </div>
+          <div class="card"><div class="ct2">Taxa de presença · mai/2025</div>
+            <div style="text-align:center;padding:11px 0;"><div style="font-size:38px;font-weight:500;color:var(--vd)">87%</div><div style="font-size:12px;color:var(--mt);margin-top:3px;">13 de 15 sessões realizadas</div>
+            <div style="margin-top:9px;height:7px;background:var(--bd);border-radius:4px;overflow:hidden;"><div style="width:87%;height:100%;background:var(--vd);border-radius:4px;"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="graf-dashboard" style="display:none;">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px;">
+          <div class="card" style="text-align:center;"><div style="font-size:28px;font-weight:500;color:var(--vd)">1</div><div style="font-size:11px;color:var(--mt);margin-top:3px;">Meta dominada</div><div class="pb" style="margin-top:7px;"><div class="pf" style="width:14%;background:var(--vd);"></div></div></div>
+          <div class="card" style="text-align:center;"><div style="font-size:28px;font-weight:500;color:var(--am)">5</div><div style="font-size:11px;color:var(--mt);margin-top:3px;">Em andamento</div><div class="pb" style="margin-top:7px;"><div class="pf" style="width:72%;background:var(--am);"></div></div></div>
+          <div class="card" style="text-align:center;"><div style="font-size:28px;font-weight:500;color:var(--mt)">1</div><div style="font-size:11px;color:var(--mt);margin-top:3px;">Não iniciada</div><div class="pb" style="margin-top:7px;"><div class="pf" style="width:14%;background:var(--bd2);"></div></div></div>
+        </div>
+        <div class="card"><div class="ct2">Evolução por domínio — ciclo 2025.1</div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#378ADD;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Comunic. receptiva</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:70%;height:100%;background:#378ADD;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">70%</div></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#D4537E;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Comunic. expressiva</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:38%;height:100%;background:#D4537E;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">38%</div></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Habilidades sociais</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:85%;height:100%;background:#1D9E75;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">85%</div></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#7F77DD;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Autonomia</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:55%;height:100%;background:#7F77DD;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">55%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-financeiro"><div class="tb"><div><div class="tb-t">Financeiro</div><div class="tb-s">Fase 2 · convênios · faturamento · NISS · DRE</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">💰</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">Módulo Financeiro</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Faturamento · convênios · códigos NISS · contas a receber · DRE · relatórios financeiros · controle de sessões por plano.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+<div class="view" id="v-familia"><div class="tb"><div><div class="tb-t">App Família</div><div class="tb-s">Fase 2 · portal · evolução · rotina · chat seguro</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">📱</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">App da Família</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Portal para famílias acompanharem evolução, compartilharem rotina, sono, alimentação e medicação, com chat seguro.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+<div class="view" id="v-comunicacao"><div class="tb"><div><div class="tb-t">Comunicação interna</div><div class="tb-s">Fase 2 · equipe · tarefas · notificações</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">💬</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">Comunicação da Equipe</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Chat interno, comentários em prontuários, tarefas da coordenação, checklist e alertas automáticos.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+<div class="view" id="v-relatorios">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;text-align:center;padding:20px;">
+    <i class="ti ti-chart-bar" style="font-size:48px;color:#2563A8;margin-bottom:16px;"></i>
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Relatórios</div>
+    <div style="font-size:13px;color:#64748B;max-width:400px;margin-bottom:24px;">
+      Os relatórios de avaliação são gerados automaticamente após finalizar uma avaliação.<br>
+      Acesse: Pacientes → Avaliações → Resultados → Relatório.
+    </div>
+    <button class="btn bp" onclick="nav('pacientes')">
+      <i class="ti ti-users"></i> Ir para Pacientes
+    </button>
+  </div>
+</div>
+
+TYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurodiversa — Sistema Clínico</title>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.x/dist/tabler-icons.min.css">
+
+<meta name="robots" content="noindex,nofollow">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --az:#2563A8;--az2:#1A4A7A;--azc:#EBF4FF;
+  --ro:#C85B82;--roc:#FDE8EF;--rom:#E0779A;
+  --vd:#0F6E56;--vdc:#D1F0E8;
+  --am:#D97706;--amc:#FEF3C7;
+  --vm:#E05050;--vmc:#FDECEA;
+  --br:#fff;--cr:#FAFAF8;--tx:#1A202C;--mt:#647585;
+  --bd:#E8EFF5;--bd2:#D0DCE8;--bg:#F4F7FA;
+  --fn:'Plus Jakarta Sans',sans-serif;
+}
+html,body{height:100%;font-family:var(--fn);font-size:13px;color:var(--tx);background:var(--bg);}
+.app{display:grid;grid-template-columns:210px 1fr;height:100vh;overflow:hidden;}
+.sidebar{background:#0D1A2B;display:flex;flex-direction:column;}
+.sb-brand{padding:18px 16px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sb-logo{display:flex;align-items:center;gap:10px;}
+.sb-ic{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--az),var(--ro));display:flex;align-items:center;justify-content:center;font-size:16px;}
+.sb-nm{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:#fff;}
+.sb-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px;}
+.sb-nav{flex:1;overflow-y:auto;padding:10px 0;}
+.sb-sec{font-size:10px;color:rgba(255,255,255,.28);padding:12px 16px 4px;letter-spacing:.9px;}
+.sb-it{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:rgba(255,255,255,.52);cursor:pointer;transition:all .15s;border-left:3px solid transparent;}
+.sb-it:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.82);}
+.sb-it.on{background:rgba(37,99,168,.22);color:#fff;border-left-color:#4A90D9;font-weight:500;}
+.sb-it i{font-size:15px;flex-shrink:0;}
+.sb-bot{padding:12px 16px;border-top:1px solid rgba(255,255,255,.07);}
+.sb-usr{display:flex;align-items:center;gap:9px;}
+.sb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--az),var(--ro));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0;}
+.sb-un{font-size:12px;font-weight:500;color:#fff;}
+.sb-ur{font-size:10px;color:rgba(255,255,255,.38);}
+.main{display:flex;flex-direction:column;overflow:hidden;}
+.tb{background:#fff;border-bottom:1px solid var(--bd);padding:0 22px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.tb-t{font-size:15px;font-weight:500;color:var(--tx);}
+.tb-s{font-size:11px;color:var(--mt);margin-top:2px;}
+.tb-r{display:flex;gap:8px;align-items:center;}
+.ct{flex:1;overflow-y:auto;padding:20px;}
+.btn{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--fn);border:none;transition:all .15s;white-space:nowrap;}
+.bp{background:var(--az);color:#fff;}.bp:hover{background:var(--az2);}
+.bs{background:var(--vd);color:#fff;}.bs:hover{background:#0a5240;}
+.bo{background:#fff;border:1px solid var(--bd2);color:var(--tx);}.bo:hover{background:var(--bg);}
+.bg2{background:transparent;color:var(--mt);border:none;padding:5px 9px;}.bg2:hover{background:var(--bg);}
+.card{background:#fff;border:1px solid var(--bd);border-radius:11px;padding:16px;}
+.ct2{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;}
+.tb2{background:var(--azc);color:var(--az2);}
+.tp{background:var(--roc);color:#7A2040;}
+.tg{background:var(--vdc);color:#0a5240;}
+.ty{background:var(--amc);color:#633806;}
+.tr{background:var(--vmc);color:#7A1B1B;}
+.tgr{background:var(--bg);color:var(--mt);}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:11px;color:var(--mt);font-weight:500;}
+.fld input,.fld select,.fld textarea{background:var(--bg);border:1px solid var(--bd);border-radius:7px;padding:7px 10px;font-size:12px;color:var(--tx);font-family:var(--fn);outline:none;width:100%;transition:border .15s;}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--az);background:#fff;}
+.fld textarea{resize:vertical;min-height:60px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.ff{grid-column:1/-1;}
+.chp{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--bd);background:var(--bg);color:var(--mt);cursor:pointer;transition:all .15s;user-select:none;}
+.chp.on{background:var(--azc);color:var(--az2);border-color:var(--az);}
+.chp.wy{background:var(--amc);color:var(--am);border-color:var(--am);}
+.chp.wr{background:var(--vmc);color:var(--vm);border-color:var(--vm);}
+.chp-g{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
+.pb{height:5px;background:var(--bd);border-radius:3px;overflow:hidden;}
+.pf{height:100%;border-radius:3px;transition:width .4s;}
+.ps{background:#fff;border-bottom:1px solid var(--bd);padding:11px 22px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.pa{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;background:var(--azc);color:var(--az2);}
+.pnm{font-size:14px;font-weight:500;color:var(--tx);}
+.pmt{font-size:11px;color:var(--mt);margin-top:2px;}
+.vtabs{display:flex;background:#fff;border-bottom:1px solid var(--bd);padding:0 22px;flex-shrink:0;}
+.vt{padding:11px 14px;font-size:12px;cursor:pointer;color:var(--mt);border-bottom:2px solid transparent;white-space:nowrap;font-family:var(--fn);background:none;border-top:none;border-left:none;border-right:none;transition:all .15s;}
+.vt.on{color:var(--az);border-bottom-color:var(--az);font-weight:500;}
+.view{display:none;flex-direction:column;height:100%;overflow-y:auto;}
+.view.on{display:flex;}
+.ai{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--bd);}
+.ai:last-child{border-bottom:none;}
+.ad{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.ali{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--bd);}
+.ali:last-child{border-bottom:none;}
+.alic{width:27px;height:27px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.aw{background:var(--amc);color:var(--am);}
+.ad2{background:var(--vmc);color:var(--vm);}
+.ai2{background:var(--azc);color:var(--az);}
+.sb2{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap;}
+.ok{background:var(--vdc);color:#0a5240;}
+.pd{background:var(--amc);color:#633806;}
+.fl{background:var(--vmc);color:#7A1B1B;}
+.tk{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd);cursor:pointer;}
+.tk:last-child{border-bottom:none;}
+.tkc{width:15px;height:15px;border-radius:4px;border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.tkc.dn{background:var(--vdc);border-color:var(--vd);}
+.tkt{font-size:12px;color:var(--tx);}
+.tkt.dn{text-decoration:line-through;color:var(--mt);}
+.sep{height:1px;background:var(--bd);margin:12px 0;}
+.dc{background:#fff;border:1px solid var(--bd);border-radius:10px;margin-bottom:10px;overflow:hidden;}
+.dch{padding:11px 14px;display:flex;align-items:center;gap:9px;cursor:pointer;transition:background .15s;}
+.dch:hover{background:var(--bg);}
+.dcb{display:none;border-top:1px solid var(--bd);}
+.dc.op .dcb{display:block;}
+.dc.op .dchv{transform:rotate(180deg);}
+.dchv{font-size:13px;color:var(--mt);transition:transform .2s;}
+.ir{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--bd);}
+.ir:last-child{border-bottom:none;}
+.sc2{width:30px;height:30px;border-radius:7px;border:1px solid var(--bd);background:var(--bg);font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:var(--fn);}
+.sc2.s0.ac{background:#F7C1C1;color:#791F1F;border-color:#F09595;}
+.sc2.s1.ac{background:var(--amc);color:#633806;border-color:var(--am);}
+.sc2.s2.ac{background:#C0DD97;color:#27500A;border-color:#97C459;}
+.sc2.sn.ac{background:var(--bg);color:var(--mt);}
+.mc{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:13px;margin-bottom:9px;cursor:pointer;transition:all .2s;}
+.mc:hover{border-color:var(--az);box-shadow:0 4px 14px rgba(37,99,168,.08);}
+.mc.sel{border-color:var(--az);background:var(--azc);}
+.mc.sug{border-left:3px solid var(--am);}
+.mcc{width:17px;height:17px;border-radius:5px;border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s;}
+.mc.sel .mcc{background:var(--az);border-color:var(--az);}
+.tn{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd);}
+.tn:last-child{border-bottom:none;}
+.tnd{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.gb{background:var(--bg);border-radius:9px;padding:13px;margin-bottom:9px;border-left:3px solid var(--bd);}
+.gb.al{border-left-color:var(--vm);}
+.gb.me{border-left-color:var(--am);}
+.gb.mn{border-left-color:var(--vd);}
+.gbt{width:100%;border-collapse:collapse;font-size:11px;margin-top:7px;}
+.gbt th{background:#fff;padding:4px 7px;text-align:left;font-weight:500;color:var(--mt);border:1px solid var(--bd);}
+.gbt td{padding:4px 7px;border:1px solid var(--bd);color:var(--tx);vertical-align:top;}
+.tb3{font-size:12px;padding:4px 11px;border-radius:8px;border:1px solid var(--bd2);background:var(--bg);color:var(--mt);cursor:pointer;font-family:var(--fn);transition:all .15s;}
+.tb3.on{background:var(--azc);color:var(--az);border-color:var(--az);}
+.tent-btn{width:100%;aspect-ratio:1;border-radius:6px;border:1px solid var(--bd);background:var(--bg);font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:var(--fn);}
+.tent-btn.A{background:#C8EAD1;border-color:#5BAB7A;color:#1A5C35;}
+.tent-btn.E{background:var(--vmc);border-color:var(--vm);color:#7A1B1B;}
+.tent-btn.P{background:var(--amc);border-color:var(--am);color:#633806;}
+.tent-btn.N{background:var(--bg);border-color:var(--bd2);color:var(--mt);}
+.sf{background:#fff;border:1px solid var(--bd);border-radius:7px;height:62px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mt);cursor:pointer;transition:all .15s;}
+.sf:hover{border-color:var(--az);background:var(--azc);}
+.sf.ok{background:var(--vdc);border-color:var(--vd);border-style:solid;color:var(--vd);}
+.up{border:1px dashed var(--bd2);border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:all .15s;}
+.up:hover{border-color:var(--az);background:var(--azc);}
+.cal-wr{overflow:auto;flex:1;}
+.cal-hd{display:grid;grid-template-columns:50px repeat(5,1fr);background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5;}
+.cal-dhd{padding:9px 6px;text-align:center;border-right:1px solid var(--bd);}
+.cal-dow{font-size:10px;color:var(--mt);}
+.cal-dn{font-size:18px;font-weight:500;color:var(--tx);line-height:1;}
+.cal-dhd.td .cal-dn{background:var(--az);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;}
+.cal-rows{display:grid;grid-template-columns:50px repeat(5,1fr);}
+.cal-tc{border-right:1px solid var(--bd);}
+.cal-ts{height:50px;display:flex;align-items:flex-start;justify-content:flex-end;padding:3px 5px 0;font-size:10px;color:var(--mt);border-bottom:1px solid var(--bd);}
+.cal-dc{border-right:1px solid var(--bd);position:relative;}
+.cal-sl{height:50px;border-bottom:1px solid var(--bd);cursor:pointer;}
+.cal-sl:hover{background:var(--azc);}
+.cal-ev{position:absolute;left:2px;right:2px;border-radius:5px;padding:3px 6px;cursor:pointer;overflow:hidden;z-index:2;}
+.cal-ev:hover{opacity:.82;z-index:4;}
+.evn{font-size:11px;font-weight:500;line-height:1.2;}
+.eve{font-size:10px;opacity:.82;}
+.evt{font-size:10px;opacity:.72;}
+.ef{background:#B5D4F4;color:#0C447C;}
+.eto{background:#9FE1CB;color:#085041;}
+.eab{background:#F4C0D1;color:#72243E;}
+.en{background:#CECBF6;color:#3C3489;}
+.eco{background:#FAC775;color:#633806;}
+.ebl{background:var(--bg);color:var(--mt);border:1px dashed var(--bd);}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.38);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(2px);}
+.mb{background:#fff;border-radius:14px;padding:22px;width:420px;max-height:80vh;overflow-y:auto;border:1px solid var(--bd);}
+.mt2{font-size:14px;font-weight:500;color:var(--tx);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px;}
+.sug-box{background:var(--azc);border:1px solid var(--az);border-radius:10px;padding:13px;}
+.sug-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid rgba(37,99,168,.12);}
+.sug-row:last-child{border-bottom:none;}
+.tree-hd{display:flex;align-items:center;gap:8px;padding:8px 13px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
+.tree-hd:hover,.tree-hd.on{background:var(--azc);}
+.tree-hd .tchv{transition:transform .2s;font-size:12px;color:var(--mt);}
+.tree-hd.op .tchv{transform:rotate(90deg);}
+.tree-sub{display:none;background:var(--bg);}
+.tree-hd.op+.tree-sub{display:block;}
+.tree-si{display:flex;align-items:center;gap:8px;padding:7px 13px 7px 27px;cursor:pointer;border-bottom:1px solid var(--bd);font-size:12px;color:var(--mt);transition:background .15s;}
+.tree-si:hover,.tree-si.on{background:var(--azc);color:var(--az);}
+.pei-cov{background:linear-gradient(135deg,var(--azc),var(--roc));border-radius:14px;padding:28px;text-align:center;margin-bottom:14px;}
+.bc-wrap{display:flex;align-items:flex-end;gap:7px;height:90px;}
+.bc-col{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
+.bc-b{width:100%;border-radius:3px 3px 0 0;}
+.bc-v{font-size:10px;color:var(--mt);}
+.bc-l{font-size:10px;color:var(--mt);text-align:center;}
+.sess-c{background:#fff;border:1px solid var(--bd);border-radius:9px;padding:11px;margin-bottom:8px;}
+.sess-p{font-size:19px;font-weight:500;}
+.sess-p.g{color:var(--vd);}
+.sess-p.m{color:var(--am);}
+.sess-p.b{color:var(--vm);}
+.pro-row{display:flex;align-items:center;gap:8px;padding:7px 13px;border-bottom:1px solid var(--bd);}
+.pro-row:last-child{border-bottom:none;}
+.pro-d{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.pro-a{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;}
+.esp-si{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;}
+.esp-si:hover{background:var(--bg);}
+.esp-si.on{background:var(--azc);border-left-color:var(--az);}
+.esp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sel-it{background:var(--bg);border-radius:8px;padding:10px 11px;margin-bottom:7px;position:relative;}
+.sel-rm{position:absolute;top:7px;right:7px;color:var(--mt);cursor:pointer;font-size:13px;}
+.sel-rm:hover{color:var(--vm);}
+@media(max-width:640px){.fr-tabela-desktop{display:none!important}.fr-cards-mobile{display:block!important}}
+</style>
+</head>
+<body>
+
+<div id="pgLoading" style="position:fixed;inset:0;background:#F4F7FA;display:none;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px;">
+  <div style="width:40px;height:40px;border:3px solid #E8EFF5;border-top-color:#2563A8;border-radius:50%;animation:spin .8s linear infinite;"></div>
+  <div style="font-size:12px;color:#647585;font-family:inherit;">Verificando sessao...</div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes lspin{to{transform:rotate(360deg)}}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+
+<div class="app" id="appShell" style="display:none">
+
+<aside class="sidebar">
+  <div class="sb-brand"><div class="sb-logo"><div class="sb-ic">🧠</div><div><div class="sb-nm">neurodiversa</div><div class="sb-sub">sistema clínico</div></div></div></div>
+  <nav class="sb-nav">
+    <div class="sb-it on" onclick="nav('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+    <div class="sb-it" onclick="nav('pacientes')"><i class="ti ti-users"></i> Pacientes</div>
+    <div class="sb-it" onclick="nav('agenda')"><i class="ti ti-calendar"></i> Agenda</div>
+    <div class="sb-it" onclick="nav('prontuario')"><i class="ti ti-notes"></i> Prontuário</div>
+    <div class="sb-sec">clínico</div>
+    <div class="sb-it" onclick="abrirModuloAvaliacao()"><i class="ti ti-clipboard-check"></i> Avaliações</div>
+    <div class="sb-it" onclick="nav('metas')"><i class="ti ti-target"></i> Metas / PEI</div>
+    <div class="sb-it" onclick="abrirFolhaRegistro()"><i class="ti ti-clipboard-list"></i> Folha de Registro</div>
+    <div class="sb-it" onclick="nav('graficos')"><i class="ti ti-chart-line"></i> Gráficos</div>
+    <div class="sb-sec">fase 2</div>
+    <div class="sb-it" onclick="nav('financeiro')"><i class="ti ti-report-money"></i> Financeiro</div>
+    <div class="sb-it" onclick="nav('familia')"><i class="ti ti-device-mobile"></i> App Família</div>
+    <div class="sb-it" onclick="nav('comunicacao')"><i class="ti ti-message-circle"></i> Comunicação</div>
+    <div class="sb-it" onclick="nav('relatorios')"><i class="ti ti-file-analytics"></i> Relatórios</div>
+    <div class="sb-it"><i class="ti ti-settings"></i> Configurações</div>
+  </nav>
+  <div class="sb-bot"><div class="sb-usr"><div class="sb-av">DC</div><div><div class="sb-un">Dani C.</div><div class="sb-ur">Coordenação</div></div></div></div>
+</aside>
+<main class="main" id="main">
+
+<div class="view on" id="v-dashboard">
+  <div class="tb"><div><div class="tb-t"><span id="dashGreet">Bom dia, Dani</span><span style="display:none" id="dashDate"></span> 👋</div><div class="tb-s"><span id="dashDate">Carregando...</span></div></div>
+  <div class="tb-r"><span class="tag tr"><i class="ti ti-alert-triangle" style="font-size:10px"></i> 3 alertas</span><button class="btn bp" onclick="nav('pacientes')"><i class="ti ti-plus"></i> Novo paciente</button></div></div>
+  <div class="ct">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px;">
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">Pacientes ativos</div><div style="font-size:26px;font-weight:500"><span id="stPacientes">—</span></div><div style="font-size:11px;color:var(--vd);margin-top:4px;">↑ +3 este mês</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">Sessões hoje</div><div style="font-size:26px;font-weight:500"><span id="stSessoes">—</span></div><div style="font-size:11px;color:var(--mt);margin-top:4px;">6 confirmadas · 8 pendentes</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">Faltas semana</div><div style="font-size:26px;font-weight:500;color:var(--am)">4</div><div style="font-size:11px;color:var(--mt);margin-top:4px;">2 reposições agendadas</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--mt);margin-bottom:5px;">PEIs pendentes</div><div style="font-size:26px;font-weight:500;color:var(--am)">7</div><div style="font-size:11px;color:var(--mt);margin-top:4px;">revisão necessária</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div class="card"><div class="ct2">Agenda de hoje <span style="font-size:11px;color:var(--mt);cursor:pointer" onclick="nav('agenda')">ver →</span></div>
+<div id="agendaHoje"><div style="font-size:12px;color:#94A3B8;text-align:center;padding:20px;">Carregando agenda...</div></div>
+</div>
+      <div class="card"><div class="ct2">Alertas clínicos <span style="font-size:11px;color:var(--mt)">3 novos</span></div>
+        <div class="ali"><div class="alic ad2"><i class="ti ti-calendar-off"></i></div><div><div style="font-size:12px;font-weight:500">Lucas R. — 3 faltas consecutivas</div><div style="font-size:11px;color:var(--mt)">Contato com família necessário</div></div></div>
+        <div class="ali"><div class="alic aw"><i class="ti ti-file-alert"></i></div><div><div style="font-size:12px;font-weight:500">PEI de Beatriz S. vence em 5 dias</div><div style="font-size:11px;color:var(--mt)">Revisão e atualização pendente</div></div></div>
+        <div class="ali"><div class="alic aw"><i class="ti ti-chart-line"></i></div><div><div style="font-size:12px;font-weight:500">Meta sem evolução — 3 semanas</div><div style="font-size:11px;color:var(--mt)">Sofia M. · comunicação funcional</div></div></div>
+        <div class="ali"><div class="alic ai2"><i class="ti ti-cake"></i></div><div><div style="font-size:12px;font-weight:500">Aniversário — Pedro A. · 7 anos hoje</div><div style="font-size:11px;color:var(--mt)">Enviar mensagem à família</div></div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+      <div class="card"><div class="ct2">Pacientes do dia</div>
+<div id="pacientesDia"><div style="font-size:12px;color:#94A3B8;text-align:center;padding:14px;">Carregando...</div></div>
+</div>
+      <div class="card"><div class="ct2">Sessões por especialidade</div>
+        <div class="bc-wrap">
+          <div class="bc-col"><div class="bc-v">12</div><div class="bc-b" style="height:100%;background:#B5D4F4;border:1px solid #4A90D9;"></div><div class="bc-l">Fono</div></div>
+          <div class="bc-col"><div class="bc-v">9</div><div class="bc-b" style="height:75%;background:#9FE1CB;border:1px solid #1D9E75;"></div><div class="bc-l">TO</div></div>
+          <div class="bc-col"><div class="bc-v">11</div><div class="bc-b" style="height:92%;background:#F4C0D1;border:1px solid #D4537E;"></div><div class="bc-l">ABA</div></div>
+          <div class="bc-col"><div class="bc-v">6</div><div class="bc-b" style="height:50%;background:#CECBF6;border:1px solid #7F77DD;"></div><div class="bc-l">Neuro</div></div>
+          <div class="bc-col"><div class="bc-v">4</div><div class="bc-b" style="height:33%;background:#FAC775;border:1px solid #BA7517;"></div><div class="bc-l">Coord</div></div>
+        </div>
+        <div style="margin-top:12px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mt);margin-bottom:3px;"><span>Presença</span><span>87%</span></div>
+          <div class="pb"><div class="pf" style="width:87%;background:var(--vd);"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mt);margin-bottom:3px;margin-top:7px;"><span>Evoluções registradas</span><span>72%</span></div>
+          <div class="pb"><div class="pf" style="width:72%;background:var(--az);"></div></div>
+        </div>
+      </div>
+      <div class="card"><div class="ct2">Tarefas</div>
+        <div class="tk" onclick="tk('t1')"><div class="tkc" id="c-t1"></div><span class="tkt" id="x-t1">Revisar PEI de Beatriz S.</span></div>
+        <div class="tk" onclick="tk('t2')"><div class="tkc" id="c-t2"></div><span class="tkt" id="x-t2">Ligar para família de Lucas R.</span></div>
+        <div class="tk" onclick="tk('t3')"><div class="tkc dn" id="c-t3"><i class="ti ti-check" style="font-size:9px;color:var(--vd)"></i></div><span class="tkt dn" id="x-t3">Reunião de equipe — pauta enviada</span></div>
+        <div class="tk" onclick="tk('t4')"><div class="tkc" id="c-t4"></div><span class="tkt" id="x-t4">Atualizar protocolo Denver</span></div>
+        <div class="tk" onclick="tk('t5')"><div class="tkc" id="c-t5"></div><span class="tkt" id="x-t5">Confirmar reposição Pedro A.</span></div>
+        <div class="sep"></div>
+        <div style="font-size:12px;color:var(--am);display:flex;gap:6px;align-items:center;"><i class="ti ti-cake"></i> Pedro A. — 7 anos hoje</div>
+        <div style="font-size:12px;color:var(--am);display:flex;gap:6px;align-items:center;margin-top:5px;"><i class="ti ti-cake"></i> Marina L. — 4 anos amanhã</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="view" id="v-pacientes">
+  <div class="tb">
+    <div><div class="tb-t">Pacientes</div><div class="tb-s" id="pacSubt">Carregando...</div></div>
+    <div class="tb-r">
+      <div style="position:relative;">
+        <i class="ti ti-search" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:13px;"></i>
+        <input id="pacBusca" placeholder="Buscar paciente..." oninput="filtrarPacientes()"
+          style="padding:8px 12px 8px 30px;border:1px solid #E2E8F0;border-radius:8px;font-size:12px;width:210px;outline:none;font-family:inherit;">
+      </div>
+      <button class="btn bp" onclick="abrirModalNovoPaciente()"><i class="ti ti-plus"></i> Novo paciente</button>
+    </div>
+  </div>
+  <div class="ct">
+    <div id="pacLista"></div>
+    <div id="pacVazio" style="display:none;text-align:center;padding:50px 20px;">
+      <div style="font-size:40px;margin-bottom:12px;">🧑‍⚕️</div>
+      <div style="font-size:15px;font-weight:600;color:#27386A;margin-bottom:6px;">Nenhum paciente cadastrado</div>
+      <div style="font-size:12px;color:#64748B;margin-bottom:18px;">Clique em Novo paciente para comecar.</div>
+      <button class="btn bp" onclick="abrirModalNovoPaciente()"><i class="ti ti-plus"></i> Cadastrar primeiro paciente</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-paciente-ficha">
+  <div class="tb">
+    <div><div class="tb-t" id="pfNome">-</div><div class="tb-s" id="pfSubt">-</div></div>
+    <div class="tb-r">
+      <button class="btn bo" onclick="nav('pacientes')"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <button class="btn bp" onclick="abrirModuloAvaliacao()"><i class="ti ti-clipboard-check"></i> Avaliações</button>
+      <button class="btn bo" onclick="abrirPEIPaciente()" style="background:#7C3AED;color:#fff;border-color:#7C3AED;"><i class="ti ti-target"></i> PEI</button>
+      <button class="btn bo" onclick="abrirFolhaRegistroPaciente(PAC.atual&&PAC.atual.id)"><i class="ti ti-clipboard-list"></i> Folha de Registro</button>
+    </div>
+  </div>
+  <div class="ps">
+    <div class="pa" id="pfAvatar">??</div>
+    <div><div class="pnm" id="pfNomeMini">-</div><div class="pmt" id="pfMeta">-</div></div>
+  </div>
+  <div class="vtabs">
+    <button class="vt on" onclick="st('pac','dados',this)">Dados gerais</button>
+    <button class="vt" onclick="st('pac','clinico',this)">Dados clinicos</button>
+    <button class="vt" onclick="st('pac','responsaveis',this)">Responsaveis</button>
+    <button class="vt" onclick="st('pac','equipe',this)">Equipe</button>
+    <button class="vt" onclick="st('pac','documentos',this)">Documentos</button>
+  </div>
+  <div class="ct">
+    <div id="pac-dados">
+      <div class="card" style="margin-bottom:13px;">
+        <div class="ct2"><span><i class="ti ti-user" style="margin-right:5px"></i>Informacoes pessoais</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button></div>
+        <div class="fg2">
+          <div class="fld ff"><label>Nome completo</label><input id="fpNome"></div>
+          <div class="fld"><label>Nome social</label><input id="fpNomeSocial"></div>
+          <div class="fld"><label>Data de nascimento</label><input type="date" id="fpNasc"></div>
+          <div class="fld"><label>Sexo</label><select id="fpSexo"><option value="">Selecione</option><option value="F">Feminino</option><option value="M">Masculino</option><option value="outro">Outro</option></select></div>
+          <div class="fld"><label>CPF</label><input id="fpCPF"></div>
+          <div class="fld"><label>Data de Inicio das Terapias</label><input type="date" id="fpDataInicio"></div>
+          <div class="fld"><label>Data de Saida das Terapias</label><input type="date" id="fpDataSaida"></div>
+          <div class="fld ff"><label>Endereco</label><input id="fpEndereco"></div>
+          <div class="fld"><label>Cidade</label><input id="fpCidade"></div>
+          <div class="fld"><label>CEP</label><input id="fpCEP"></div>
+        </div>
+      </div>
+    </div>
+    <div id="pac-clinico" style="display:none;">
+      <div class="card">
+        <div class="ct2"><span><i class="ti ti-stethoscope" style="margin-right:5px"></i>Diagnostico</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button></div>
+        <div class="fg2">
+          <div class="fld ff"><label>CID</label>
+            <div style="position:relative;">
+              <input id="fpCIDBusca" placeholder="Digite F84 ou Autismo..." autocomplete="off"
+                oninput="cidBuscar(this.value,'fpCIDRes','fpCIDSel')"
+                style="width:100%;border:1.5px solid #CBD5E1;border-radius:8px;padding:8px 11px;font-size:12.5px;outline:none;font-family:inherit;">
+              <div id="fpCIDRes" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #E2E8F0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:999;max-height:200px;overflow-y:auto;"></div>
+            </div>
+            <div id="fpCIDSel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;"></div>
+            <input type="hidden" id="fpCID">
+          </div>
+          <div class="fld ff"><label>Observacoes</label><textarea id="fpDiagObs"></textarea></div>
+          <div class="fld ff"><label>Obs. gerais</label><textarea id="fpObsGerais"></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div id="pac-responsaveis" style="display:none;">
+      <div class="card">
+        <div class="ct2"><span><i class="ti ti-users" style="margin-right:5px"></i>Responsaveis</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="abrirModalResponsavel()"><i class="ti ti-plus"></i> Adicionar</button></div>
+        <div id="pfResponsaveis"><div style="font-size:12px;color:#64748B;text-align:center;padding:14px;">Nenhum responsavel.</div></div>
+        <div class="ct2" style="margin-top:13px;"><span><i class="ti ti-id-badge" style="margin-right:5px"></i>Convenio</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button></div>
+        <div class="fg2">
+          <div class="fld"><label>Operadora</label><input id="fpConvenio"></div>
+          <div class="fld"><label>Numero</label><input id="fpNumConvenio"></div>
+          <div class="fld"><label>Validade</label><input type="date" id="fpValConvenio"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="pac-equipe" style="display:none;">
+      <div class="card" style="margin-bottom:13px;">
+        <div class="ct2">
+          <span><i class="ti ti-users-group" style="margin-right:5px"></i>Equipe Responsavel</span>
+          <button class="btn bo" style="font-size:11px;margin-left:auto" onclick="salvarFicha()"><i class="ti ti-device-floppy"></i> Salvar</button>
+        </div>
+        <div style="font-size:11.5px;color:#92400e;background:#FEF3C7;border-radius:8px;padding:10px 13px;margin-bottom:12px;">
+          <i class="ti ti-info-circle"></i> Preencha apenas os coordenadores que atendem este paciente.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:14px;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Coordenador</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpCoordABA" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpCoordABAEsp" placeholder="Ex: ABA, Psicologia"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpCoordABACons" placeholder="Ex: CRP 06/12345"></div>
+            </div>
+          </div>
+
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:14px;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Coordenador</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpCoordFono" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpCoordFonoEsp" placeholder="Ex: Fonoaudiologia, TO"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpCoordFonoCons" placeholder="Ex: CREFONO 2/12345"></div>
+            </div>
+          </div>
+
+          <div style="border:1px solid #E2E8F0;border-radius:10px;padding:14px;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;">Coordenador</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpCoordTO" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpCoordTOEsp" placeholder="Ex: Terapia Ocupacional"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpCoordTOCons" placeholder="Ex: CREFITO 3/12345"></div>
+            </div>
+          </div>
+
+          <div style="border:1.5px solid #2563A8;border-radius:10px;padding:14px;background:#EEF4FF;">
+            <div style="font-size:10.5px;font-weight:700;color:#2563A8;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;"><i class="ti ti-shield-check" style="font-size:11px"></i> Supervisor Clinico</div>
+            <div class="fg2">
+              <div class="fld ff"><label>Nome</label><input id="fpSupervisor" placeholder="Nome completo"></div>
+              <div class="fld"><label>Especialidade</label><input id="fpSupervisorEsp" placeholder="Ex: Neuropsicologia"></div>
+              <div class="fld"><label>Conselho de Classe</label><input id="fpSupervisorCons" placeholder="Ex: CRM 06/12345"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card" style="border:1.5px solid #FEE2E2;">
+        <div class="ct2"><span style="color:#EF4444"><i class="ti ti-alert-triangle" style="margin-right:5px"></i>Zona de Perigo</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;">
+          <div>
+            <div style="font-size:13px;font-weight:500">Excluir cadastro</div>
+            <div style="font-size:12px;color:#64748B">Esta acao e permanente e nao pode ser desfeita.</div>
+          </div>
+          <button class="btn" style="background:#FEF2F2;border:1.5px solid #FECACA;color:#EF4444;" onclick="excluirPaciente()">
+            <i class="ti ti-trash"></i> Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="pac-documentos" style="display:none;">
+      <div class="card" style="margin-bottom:13px;">
+        <div class="ct2"><span><i class="ti ti-paperclip" style="margin-right:5px"></i>Documentos do Paciente</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+          <div class="doc-upload-area" onclick="document.getElementById('uploadCarteirinha').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-id-badge" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Carteirinha do Convenio</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF, JPG ou PNG</div>
+            <div id="nomeCarteirinha" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadCarteirinha" accept=".pdf,.jpg,.jpeg,.png" style="display:none"
+              onchange="uploadDocumento(this,'carteirinha','nomeCarteirinha')">
+          </div>
+          <div class="doc-upload-area" onclick="document.getElementById('uploadLaudo').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-file-text" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Laudo Medico / Diagnostico</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF</div>
+            <div id="nomeLaudo" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadLaudo" accept=".pdf" style="display:none"
+              onchange="uploadDocumento(this,'laudo','nomeLaudo')">
+          </div>
+          <div class="doc-upload-area" onclick="document.getElementById('uploadRelatorio').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-chart-bar" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Relatorio Anterior</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF</div>
+            <div id="nomeRelatorio" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadRelatorio" accept=".pdf" style="display:none"
+              onchange="uploadDocumento(this,'relatorio','nomeRelatorio')">
+          </div>
+          <div class="doc-upload-area" onclick="document.getElementById('uploadOutro').click()"
+            style="border:2px dashed #CBD5E1;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .15s;"
+            onmouseover="this.style.borderColor='#2563A8';this.style.background='#EEF4FF'"
+            onmouseout="this.style.borderColor='#CBD5E1';this.style.background=''">
+            <i class="ti ti-file-plus" style="font-size:24px;color:#94A3B8;display:block;margin-bottom:6px"></i>
+            <div style="font-size:12px;font-weight:600;color:#374151">Outros Documentos</div>
+            <div style="font-size:11px;color:#94A3B8;margin-top:3px">PDF, JPG ou PNG</div>
+            <div id="nomeOutro" style="font-size:11px;color:#2563A8;margin-top:6px;font-weight:500"></div>
+            <input type="file" id="uploadOutro" accept=".pdf,.jpg,.jpeg,.png" style="display:none"
+              onchange="uploadDocumento(this,'outro','nomeOutro')">
+          </div>
+        </div>
+        <div id="listaDocumentos">
+          <div style="font-size:12px;color:#94A3B8;text-align:center;padding:10px;">Carregando documentos...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-agenda">
+  <div class="tb">
+    <div style="display:flex;align-items:center;gap:11px;"><div><div class="tb-t">Agenda multiprofissional</div></div>
+    <div style="display:flex;align-items:center;gap:5px;"><button class="btn bg2" onclick="wk(-1)"><i class="ti ti-chevron-left"></i></button><span style="font-size:13px;font-weight:500;min-width:165px;text-align:center" id="wl">26 mai — 30 mai 2025</span><button class="btn bg2" onclick="wk(1)"><i class="ti ti-chevron-right"></i></button><button class="btn bo" onclick="wt()" style="font-size:11px;padding:5px 9px;">Hoje</button></div></div>
+    <div class="tb-r"><button class="btn bo"><i class="ti ti-list"></i> Lista de espera</button><button class="btn bp" onclick="om('m-agenda')"><i class="ti ti-plus"></i> Novo agendamento</button></div>
+  </div>
+  <div style="background:#fff;border-bottom:1px solid var(--bd);padding:9px 22px;display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0;">
+    <span style="font-size:11px;color:var(--mt);margin-right:3px;">Filtrar:</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#378ADD;margin-right:3px;"></span>Fono</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#1D9E75;margin-right:3px;"></span>TO</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#D4537E;margin-right:3px;"></span>ABA</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#7F77DD;margin-right:3px;"></span>Neuro</span>
+    <span class="chp on" onclick="this.classList.toggle('on')" style="font-size:11px;"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#BA7517;margin-right:3px;"></span>Coord</span>
+  </div>
+  <div style="display:flex;flex:1;overflow:hidden;">
+    <div style="width:170px;background:#fff;border-right:1px solid var(--bd);overflow-y:auto;padding:12px 0;">
+      <div style="font-size:10px;color:var(--mt);letter-spacing:.8px;padding:0 13px;margin-bottom:9px;">PROFISSIONAIS</div>
+      <div class="pro-row"><div class="pro-d" style="background:#378ADD"></div><div class="pro-a" style="background:#B5D4F4;color:#0C447C;">AL</div><div><div style="font-size:11px;font-weight:500">Dra. Ana Lima</div><div style="font-size:10px;color:var(--mt)">Fonoaudiologia</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#1D9E75"></div><div class="pro-a" style="background:#9FE1CB;color:#085041;">CR</div><div><div style="font-size:11px;font-weight:500">Dr. Carlos R.</div><div style="font-size:10px;color:var(--mt)">T. Ocupacional</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#D4537E"></div><div class="pro-a" style="background:var(--roc);color:#72243E;">PN</div><div><div style="font-size:11px;font-weight:500">Dra. Paula N.</div><div style="font-size:10px;color:var(--mt)">ABA</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#7F77DD"></div><div class="pro-a" style="background:#CECBF6;color:#3C3489;">FM</div><div><div style="font-size:11px;font-weight:500">Dr. Fábio M.</div><div style="font-size:10px;color:var(--mt)">Neuropsico</div></div></div>
+      <div class="pro-row"><div class="pro-d" style="background:#BA7517"></div><div class="pro-a" style="background:var(--amc);color:#633806;">DC</div><div><div style="font-size:11px;font-weight:500">Dani C.</div><div style="font-size:10px;color:var(--mt)">Coordenação</div></div></div>
+    </div>
+    <div class="cal-wr">
+      <div class="cal-hd" id="cal-hd">
+        <div style="border-right:1px solid var(--bd);"></div>
+        <div class="cal-dhd"><div class="cal-dow">SEG</div><div class="cal-dn">26</div></div>
+        <div class="cal-dhd td"><div class="cal-dow" style="color:var(--az)">TER</div><div class="cal-dn">27</div></div>
+        <div class="cal-dhd"><div class="cal-dow">QUA</div><div class="cal-dn">28</div></div>
+        <div class="cal-dhd"><div class="cal-dow">QUI</div><div class="cal-dn">29</div></div>
+        <div class="cal-dhd"><div class="cal-dow">SEX</div><div class="cal-dn">30</div></div>
+      </div>
+      <div class="cal-rows" id="cal-rows"></div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-prontuario">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;text-align:center;padding:20px;">
+    <i class="ti ti-notes-medical" style="font-size:48px;color:#2563A8;margin-bottom:16px;"></i>
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Prontuário</div>
+    <div style="font-size:13px;color:#64748B;max-width:400px;margin-bottom:24px;">
+      Acesse o prontuário completo pela ficha do paciente.<br>
+      Selecione um paciente na lista para ver seus dados, avaliações e registros.
+    </div>
+    <button class="btn bp" onclick="nav('pacientes')">
+      <i class="ti ti-users"></i> Ir para Pacientes
+    </button>
+  </div>
+</div>
+
+<div class="view" id="v-avaliacoes">
+  <!-- CABEÇALHO -->
+  <div class="tb">
+    <div>
+      <div class="tb-t">Avaliações</div>
+      <div class="tb-s" id="avSubt">Selecione um paciente</div>
+    </div>
+    <div class="tb-r">
+      <button class="btn bo" onclick="nav('paciente-ficha')"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <button class="btn bp" id="btnNovaAv" onclick="abrirNovaAvaliacao()" style="display:none"><i class="ti ti-plus"></i> Nova Avaliação</button>
+    </div>
+  </div>
+
+  <!-- LISTA DE AVALIAÇÕES DO PACIENTE -->
+  <div id="avListaView">
+    <div id="avLista" style="padding:16px;">
+      <div style="text-align:center;color:#94A3B8;padding:40px;font-size:13px;">
+        <i class="ti ti-clipboard-list" style="font-size:32px;display:block;margin-bottom:8px;"></i>
+        Nenhuma avaliação encontrada para este paciente.
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SELECIONAR PROTOCOLO -->
+  <div id="avModalProtocolo" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:14px;padding:28px;width:520px;max-width:95vw;max-height:85vh;overflow-y:auto;">
+      <div style="font-size:16px;font-weight:600;margin-bottom:6px;">Nova Avaliação</div>
+      <div style="font-size:12px;color:#64748B;margin-bottom:18px;" id="avModalPacNome">Paciente: —</div>
+      <div style="font-size:11.5px;font-weight:600;color:#374151;margin-bottom:10px;">Selecione um ou mais protocolos para esta avaliação:</div>
+      <div id="avProtocoloLista" style="display:grid;gap:8px;"></div>
+      <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;">
+        <button class="btn bo" onclick="fecharModalProtocolo()">Cancelar</button>
+        <button class="btn bp" onclick="iniciarAvaliacao()"><i class="ti ti-play"></i> Iniciar Avaliação</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA DE APLICAÇÃO DO PROTOCOLO -->
+  <div id="avAplicacaoView" style="display:none;flex:1;overflow:hidden;display:none;flex-direction:column;">
+    <!-- Topo da aplicação -->
+    <div style="background:#fff;border-bottom:1px solid #E2E8F0;padding:12px 20px;display:flex;align-items:center;gap:12px;">
+      <button class="btn bo" style="font-size:11px;" onclick="voltarListaAvaliacoes()"><i class="ti ti-arrow-left"></i> Voltar</button>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:600;" id="avAplTitulo">—</div>
+        <div style="font-size:11px;color:#64748B;" id="avAplSubt">—</div>
+      </div>
+      <div style="font-size:11px;color:#64748B;" id="avAplProgresso">Item 0 de 0</div>
+      <button class="btn bp" style="font-size:11px;" onclick="finalizarAvaliacao()"><i class="ti ti-check"></i> Finalizar</button>
+    </div>
+    <!-- Barra de progresso -->
+    <div style="height:4px;background:#E2E8F0;">
+      <div id="avBarraProgresso" style="height:4px;background:#2563A8;width:0%;transition:width .3s;"></div>
+    </div>
+    <!-- Área principal: sidebar domínios + item atual -->
+    <div style="display:flex;flex:1;overflow:hidden;">
+      <!-- Sidebar: domínios -->
+      <div style="width:200px;border-right:1px solid #E2E8F0;overflow-y:auto;background:#F8FAFC;">
+        <div style="padding:10px 12px;font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.8px;text-transform:uppercase;">Domínios</div>
+        <div id="avDominioLista"></div>
+      </div>
+      <!-- Área do item -->
+      <div style="flex:1;overflow-y:auto;padding:24px;">
+        <div id="avItemArea">
+          <div style="text-align:center;color:#94A3B8;padding:40px;">Selecione um domínio para começar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="view" id="v-registro">
+  <div class="tb">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="logo.png" style="height:32px;object-fit:contain;">
+      <div>
+        <div class="tb-t">Folha de Registro</div>
+        <div class="tb-s" id="frSubt">Selecione um paciente para iniciar</div>
+      </div>
+    </div>
+    <div class="tb-r">
+      <button class="btn bo" onclick="nav('pacientes')"><i class="ti ti-arrow-left"></i> Pacientes</button>
+      <button class="btn bp" id="btnNovaSessao" onclick="iniciarNovaSessao()" style="display:none"><i class="ti ti-plus"></i> Nova Sessão</button>
+    </div>
+  </div>
+  <div id="frConteudo">
+    <div style="text-align:center;color:#94A3B8;padding:60px 20px;">
+      <i class="ti ti-clipboard-list" style="font-size:40px;display:block;margin-bottom:12px;"></i>
+      <div style="font-size:14px;font-weight:500;margin-bottom:6px;">Folha de Registro</div>
+      <div style="font-size:12px;">Acesse pelo botão "Folha de Registro" na ficha do paciente</div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-metas">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;text-align:center;padding:20px;">
+    <i class="ti ti-target" style="font-size:48px;color:#2563A8;margin-bottom:16px;"></i>
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Metas e PEI</div>
+    <div style="font-size:13px;color:#64748B;max-width:400px;margin-bottom:24px;">
+      O PEI é gerado automaticamente após finalizar uma avaliação.<br>
+      Acesse a ficha do paciente → Avaliações → selecione uma avaliação finalizada → Resultados → Gerar PEI.
+    </div>
+    <button class="btn bp" onclick="nav('pacientes')">
+      <i class="ti ti-users"></i> Ir para Pacientes
+    </button>
+  </div>
+</div>
+
+<div class="view" id="v-graficos">
+  <div class="tb"><div><div class="tb-t">Folhas de registro e gráficos evolutivos</div><div class="tb-s">Coleta vinculada às metas · visualização de evolução</div></div>
+  <div class="tb-r"><button class="btn bo"><i class="ti ti-download"></i> Exportar</button><button class="btn bp"><i class="ti ti-file-analytics"></i> Relatório evolutivo</button></div></div>
+  <div class="vtabs"><button class="vt on" onclick="st('graf','registro',this)">Folha de registro</button><button class="vt" onclick="st('graf','graficos',this)">Gráficos</button><button class="vt" onclick="st('graf','dashboard',this)">Dashboard clínico</button></div>
+  <div style="display:flex;flex:1;overflow:hidden;">
+    <div style="width:210px;background:#fff;border-right:1px solid var(--bd);overflow-y:auto;padding:11px 0;">
+      <div style="font-size:10px;color:var(--mt);letter-spacing:.8px;padding:0 13px;margin-bottom:8px;">METAS ATIVAS</div>
+      <div style="padding:8px 13px;border-left:3px solid var(--az);background:var(--azc);cursor:pointer;">
+        <div style="font-size:10px;color:var(--mt)">CR-01 · Fono/ABA</div>
+        <div style="font-size:12px;font-weight:500;color:var(--az);margin-top:2px;">Seguir instrução 2 etapas</div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:5px;"><div style="flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;"><div style="width:70%;height:100%;background:var(--az);border-radius:2px;"></div></div><span style="font-size:10px;color:var(--mt)">70%</span></div>
+      </div>
+      <div style="padding:8px 13px;border-left:3px solid transparent;cursor:pointer;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+        <div style="font-size:10px;color:var(--mt)">CE-01 · Fono</div>
+        <div style="font-size:12px;font-weight:500;margin-top:2px;">Combinar 2 palavras CAA</div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:5px;"><div style="flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;"><div style="width:45%;height:100%;background:#D4537E;border-radius:2px;"></div></div><span style="font-size:10px;color:var(--mt)">45%</span></div>
+      </div>
+      <div style="padding:8px 13px;border-left:3px solid transparent;cursor:pointer;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+        <div style="font-size:10px;color:var(--mt)">HS-01 · ABA</div>
+        <div style="font-size:12px;font-weight:500;margin-top:2px;">Contato visual funcional</div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:5px;"><div style="flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;"><div style="width:85%;height:100%;background:#1D9E75;border-radius:2px;"></div></div><span style="font-size:10px;color:var(--mt)">85%</span></div>
+      </div>
+    </div>
+    <div class="ct">
+      <div id="graf-registro">
+        <div class="card" style="margin-bottom:12px;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:11px;">
+            <div><div style="font-size:14px;font-weight:500">CR-01 · Seguir instrução de 2 etapas</div><div style="font-size:11px;color:var(--mt);margin-top:1px;">Fono+ABA · Dra. Ana Lima · 27/05/2025</div></div>
+            <span class="tag ty">Em andamento · 70%</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px;background:var(--bg);border-radius:8px;padding:9px;margin-bottom:13px;">
+            <div><div style="font-size:10px;color:var(--mt)">Sessões</div><div style="font-size:17px;font-weight:500">13</div></div>
+            <div><div style="font-size:10px;color:var(--mt)">Média atual</div><div style="font-size:17px;font-weight:500;color:var(--am)">70%</div></div>
+            <div><div style="font-size:10px;color:var(--mt)">Critério</div><div style="font-size:17px;font-weight:500">80%</div></div>
+            <div><div style="font-size:10px;color:var(--mt)">Tendência</div><div style="font-size:17px;font-weight:500;color:var(--vd)">↑</div></div>
+          </div>
+          <div style="font-size:12px;font-weight:500;margin-bottom:7px;">Sessão atual — 27/05/2025</div>
+          <div style="display:flex;gap:7px;margin-bottom:9px;flex-wrap:wrap;">
+            <span class="tag tg">■ Acerto</span><span class="tag tr">■ Erro</span><span class="tag ty">■ Prompt</span><span class="tag tgr">■ N/A</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-bottom:7px;" id="tent-g"></div>
+          <div style="font-size:11px;color:var(--mt);margin-bottom:13px;">Clique para alternar: vazio → Acerto → Erro → Prompt → N/A</div>
+          <div style="display:flex;justify-content:flex-end;gap:7px;"><button class="btn bo">Cancelar</button><button class="btn bp" onclick="alert('Sessão salva! Gráfico atualizado.')"><i class="ti ti-device-floppy"></i> Salvar sessão</button></div>
+        </div>
+        <div class="sess-c"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;"><div><div style="font-size:12px;font-weight:500">20/05/2025</div><div style="font-size:11px;color:var(--mt)">Dra. Ana Lima</div></div><div class="sess-p g">70%</div></div><div style="font-size:12px;color:var(--mt);line-height:1.7;">Boa sessão. Sofia demonstrou melhora. Prompt gestual em 2 tentativas. Tendência positiva.</div></div>
+        <div class="sess-c"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;"><div><div style="font-size:12px;font-weight:500">13/05/2025</div><div style="font-size:11px;color:var(--mt)">Dra. Ana Lima</div></div><div class="sess-p m">60%</div></div><div style="font-size:12px;color:var(--mt);line-height:1.7;">Resistência inicial. 6 de 10 tentativas. Prompt verbal em 3 ocasiões.</div></div>
+      </div>
+      <div id="graf-graficos" style="display:none;">
+        <div class="card" style="margin-bottom:13px;"><div class="ct2">Evolução — CR-01: Seguir instrução de 2 etapas</div>
+          <div style="font-size:11px;color:var(--mt);margin-bottom:9px;">Porcentagem de acertos · critério 80% (linha verde)</div>
+          <svg viewBox="0 0 540 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:120px;">
+            <line x1="38" y1="10" x2="530" y2="10" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="37" x2="530" y2="37" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="64" x2="530" y2="64" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="91" x2="530" y2="91" stroke="var(--bd)" stroke-width="0.5" stroke-dasharray="3"/><line x1="38" y1="110" x2="530" y2="110" stroke="var(--bd)" stroke-width="0.5"/>
+            <text x="30" y="13" font-size="9" fill="var(--mt)" text-anchor="end">100%</text><text x="30" y="67" font-size="9" fill="var(--mt)" text-anchor="end">50%</text><text x="30" y="113" font-size="9" fill="var(--mt)" text-anchor="end">0%</text>
+            <line x1="38" y1="24" x2="530" y2="24" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+            <text x="534" y="27" font-size="8" fill="#1D9E75">80%</text>
+            <polyline points="65,92 110,82 155,87 200,73 245,78 290,65 335,59 380,65 425,53 470,47" fill="none" stroke="var(--az)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="65,92 110,82 155,87 200,73 245,78 290,65 335,59 380,65 425,53 470,47 470,110 65,110" fill="var(--az)" opacity="0.07"/>
+            <circle cx="65" cy="92" r="3.5" fill="var(--az)"/><circle cx="110" cy="82" r="3.5" fill="var(--az)"/><circle cx="155" cy="87" r="3.5" fill="var(--az)"/><circle cx="200" cy="73" r="3.5" fill="var(--az)"/><circle cx="245" cy="78" r="3.5" fill="var(--az)"/><circle cx="290" cy="65" r="3.5" fill="var(--az)"/><circle cx="335" cy="59" r="3.5" fill="var(--az)"/><circle cx="380" cy="65" r="3.5" fill="var(--az)"/><circle cx="425" cy="53" r="3.5" fill="var(--az)"/><circle cx="470" cy="47" r="3.5" fill="var(--az)"/>
+            <text x="65" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">mar</text><text x="200" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">abr</text><text x="335" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">mai/1</text><text x="470" y="125" font-size="8" fill="var(--mt)" text-anchor="middle">mai/4</text>
+          </svg>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+          <div class="card"><div class="ct2">Comparativo de metas</div>
+            <div class="bc-wrap">
+              <div class="bc-col"><div class="bc-v">70%</div><div class="bc-b" style="height:82%;background:var(--azc);border:1px solid var(--az);"></div><div class="bc-l">CR-01</div></div>
+              <div class="bc-col"><div class="bc-v">45%</div><div class="bc-b" style="height:53%;background:var(--roc);border:1px solid var(--ro);"></div><div class="bc-l">CE-01</div></div>
+              <div class="bc-col"><div class="bc-v">85%</div><div class="bc-b" style="height:100%;background:var(--vdc);border:1px solid var(--vd);"></div><div class="bc-l">HS-01</div></div>
+              <div class="bc-col"><div class="bc-v">55%</div><div class="bc-b" style="height:65%;background:#EEEDFE;border:1px solid #7F77DD;"></div><div class="bc-l">AUT-01</div></div>
+            </div>
+          </div>
+          <div class="card"><div class="ct2">Taxa de presença · mai/2025</div>
+            <div style="text-align:center;padding:11px 0;"><div style="font-size:38px;font-weight:500;color:var(--vd)">87%</div><div style="font-size:12px;color:var(--mt);margin-top:3px;">13 de 15 sessões realizadas</div>
+            <div style="margin-top:9px;height:7px;background:var(--bd);border-radius:4px;overflow:hidden;"><div style="width:87%;height:100%;background:var(--vd);border-radius:4px;"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="graf-dashboard" style="display:none;">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px;">
+          <div class="card" style="text-align:center;"><div style="font-size:28px;font-weight:500;color:var(--vd)">1</div><div style="font-size:11px;color:var(--mt);margin-top:3px;">Meta dominada</div><div class="pb" style="margin-top:7px;"><div class="pf" style="width:14%;background:var(--vd);"></div></div></div>
+          <div class="card" style="text-align:center;"><div style="font-size:28px;font-weight:500;color:var(--am)">5</div><div style="font-size:11px;color:var(--mt);margin-top:3px;">Em andamento</div><div class="pb" style="margin-top:7px;"><div class="pf" style="width:72%;background:var(--am);"></div></div></div>
+          <div class="card" style="text-align:center;"><div style="font-size:28px;font-weight:500;color:var(--mt)">1</div><div style="font-size:11px;color:var(--mt);margin-top:3px;">Não iniciada</div><div class="pb" style="margin-top:7px;"><div class="pf" style="width:14%;background:var(--bd2);"></div></div></div>
+        </div>
+        <div class="card"><div class="ct2">Evolução por domínio — ciclo 2025.1</div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#378ADD;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Comunic. receptiva</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:70%;height:100%;background:#378ADD;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">70%</div></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#D4537E;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Comunic. expressiva</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:38%;height:100%;background:#D4537E;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">38%</div></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Habilidades sociais</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:85%;height:100%;background:#1D9E75;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">85%</div></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:9px;height:9px;border-radius:50%;background:#7F77DD;flex-shrink:0;"></div><div style="font-size:12px;color:var(--mt);min-width:135px;">Autonomia</div><div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;"><div style="width:55%;height:100%;background:#7F77DD;border-radius:3px;"></div></div><div style="font-size:11px;font-weight:500;min-width:32px;text-align:right;">55%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-financeiro"><div class="tb"><div><div class="tb-t">Financeiro</div><div class="tb-s">Fase 2 · convênios · faturamento · NISS · DRE</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">💰</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">Módulo Financeiro</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Faturamento · convênios · códigos NISS · contas a receber · DRE · relatórios financeiros · controle de sessões por plano.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+<div class="view" id="v-familia"><div class="tb"><div><div class="tb-t">App Família</div><div class="tb-s">Fase 2 · portal · evolução · rotina · chat seguro</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">📱</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">App da Família</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Portal para famílias acompanharem evolução, compartilharem rotina, sono, alimentação e medicação, com chat seguro.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+<div class="view" id="v-comunicacao"><div class="tb"><div><div class="tb-t">Comunicação interna</div><div class="tb-s">Fase 2 · equipe · tarefas · notificações</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">💬</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">Comunicação da Equipe</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Chat interno, comentários em prontuários, tarefas da coordenação, checklist e alertas automáticos.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+<div class="view" id="v-relatorios"><div class="tb"><div><div class="tb-t">Relatórios</div><div class="tb-s">Fase 2 · evolutivo · escolar · financeiro · PDF · Word · Excel</div></div></div><div class="ct" style="display:flex;align-items:center;justify-content:center;flex:1;"><div style="text-align:center;max-width:380px;"><div style="font-size:46px;margin-bottom:14px;">📊</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--az2);margin-bottom:9px;">Relatórios Automáticos</div><div style="font-size:14px;color:var(--mt);line-height:1.7;margin-bottom:20px;">Geração automática de relatórios evolutivos, escolares, de produtividade e financeiros. Exportação em PDF, Word e Excel.</div><span class="tag ty"><i class="ti ti-clock" style="font-size:10px"></i> Em desenvolvimento — Fase 2</span></div></div></div>
+
+<div class="mo" id="m-agenda" style="display:none;" onclick="if(event.target===this)cm('m-agenda')">
+  <div class="mb"><div class="mt2">Novo agendamento <span onclick="cm('m-agenda')" style="cursor:pointer;color:var(--mt)"><i class="ti ti-x"></i></span></div>
+    <div class="fg2" style="margin-bottom:13px;">
+      <div class="fld ff"><label>Paciente</label><select><option>Sofia Mendes — TEA</option><option>Pedro Alves — TDAH</option><option>Beatriz Santos</option><option>Lucas Ramos</option></select></div>
+      <div class="fld ff"><label>Tipo de atendimento</label><select><option>Sessão terapêutica</option><option>Avaliação inicial</option><option>Orientação parental</option><option>Encaixe</option><option>Reposição</option><option>Bloqueio</option></select></div>
+      <div class="fld ff"><label>Profissional</label><select><option>Fonoaudiologia — Dra. Ana Lima</option><option>T. Ocupacional — Dr. Carlos</option><option>ABA — Dra. Paula Neves</option><option>Neuropsico — Dr. Fábio</option><option>Coordenação — Dani C.</option></select></div>
+      <div class="fld"><label>Data</label><input type="date" value="2025-05-27"></div>
+      <div class="fld"><label>Horário</label><input type="time" value="09:00"></div>
+      <div class="fld"><label>Duração</label><select><option>30 min</option><option selected>45 min</option><option>60 min</option></select></div>
+      <div class="fld"><label>Sala</label><select><option>Sala 1 — Fono</option><option>Sala 2 — TO</option><option>Sala 3 — ABA</option></select></div>
+      <div class="fld"><label>Recorrência</label><select><option selected>Sem recorrência</option><option>Semanal</option><option>Quinzenal</option></select></div>
+    </div>
+    <div style="display:flex;gap:7px;justify-content:flex-end;"><button class="btn bo" onclick="cm('m-agenda')">Cancelar</button><button class="btn bp" onclick="cm('m-agenda');alert('Agendamento salvo!')"><i class="ti ti-check"></i> Salvar</button></div>
+  </div>
+</div>
+
+
+</main>
+</div>
+
+
+
+
+<div id="loginOverlay" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#EEF4FF 0%,#F8FAFF 55%,#FDF0F6 100%);display:flex;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#fff;border:1px solid #E2E8F0;border-radius:20px;width:100%;max-width:400px;box-shadow:0 4px 24px rgba(39,56,106,.12);overflow:hidden;">
+    <div style="padding:28px 32px 18px;text-align:center;background:linear-gradient(180deg,#F0F6FF,#fff);border-bottom:1px solid #E2E8F0;">
+      <img src="logo.png" style="width:100px;height:100px;object-fit:contain;display:block;margin:0 auto 8px;" alt="Neurodiversa">
+      <div style="font-size:20px;font-weight:700;color:#27386A;">Neurodiversa</div>
+      <div style="font-size:12px;color:#64748B;margin-top:2px;">Plataforma Clinica - Acesse sua conta</div>
+    </div>
+    <div style="padding:22px 28px 26px;">
+      <div id="lAlerta" style="display:none;margin-bottom:13px;"></div>
+      <div style="margin-bottom:13px;">
+        <label style="font-size:11.5px;font-weight:600;color:#27386A;margin-bottom:5px;display:block;">E-mail</label>
+        <div style="position:relative;">
+          <i class="ti ti-mail" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:15px;"></i>
+          <input id="lEmail" type="email" placeholder="seu@email.com" autocomplete="email"
+            style="width:100%;border:1.5px solid #CBD5E1;border-radius:8px;padding:10px 11px 10px 36px;font-size:13px;color:#27386A;outline:none;font-family:inherit;">
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:11.5px;font-weight:600;color:#27386A;margin-bottom:5px;display:block;">Senha</label>
+        <div style="position:relative;">
+          <i class="ti ti-lock" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#94A3B8;font-size:15px;"></i>
+          <input id="lSenha" type="password" placeholder="••••••••" autocomplete="current-password"
+            style="width:100%;border:1.5px solid #CBD5E1;border-radius:8px;padding:10px 36px 10px 36px;font-size:13px;color:#27386A;outline:none;font-family:inherit;">
+        </div>
+      </div>
+      <button id="lBtnLogin" onclick="lLogin()"
+        style="width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,#27386A,#4A6FBF);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">
+        <i class="ti ti-login"></i> Entrar na plataforma
+      </button>
+    </div>
+    <div style="padding:11px 28px;border-top:1px solid #E2E8F0;text-align:center;font-size:11px;color:#94A3B8;background:#FAFBFF;">
+      <i class="ti ti-lock-filled" style="color:#E91E8C;font-size:11px;"></i> Conexao segura - Neurodiversa 2025
+    </div>
+  </div>
+</div>
+
+
+<style>
+#loginOverlay.hidden{display:none!important;}
+</style>
+
+
+<div class="mo" id="m-novo-paciente" style="display:none;" onclick="if(event.target===this)cm('m-novo-paciente')">
+  <div class="mb">
+    <div class="mt2">Novo paciente <span onclick="cm('m-novo-paciente')" style="cursor:pointer;color:#94A3B8;float:right"><i class="ti ti-x"></i></span></div>
+    <div class="fg2" style="margin-bottom:13px;">
+      <div class="fld ff"><label>Nome completo *</label><input id="npNome" placeholder="Nome completo da crianca"></div>
+      <div class="fld"><label>Data de nascimento</label><input type="date" id="npNasc"></div>
+      <div class="fld"><label>Sexo</label><select id="npSexo"><option value="">Selecione</option><option value="F">Feminino</option><option value="M">Masculino</option><option value="outro">Outro</option></select></div>
+      <div class="fld ff"><label>CID (opcional)</label>
+        <div style="position:relative;">
+          <input id="npCIDBusca" placeholder="Digite F84 ou Autismo..." autocomplete="off"
+            oninput="cidBuscar(this.value,'npCIDRes','npCIDSel')"
+            style="width:100%;border:1.5px solid #CBD5E1;border-radius:8px;padding:8px 11px;font-size:12.5px;outline:none;font-family:inherit;">
+          <div id="npCIDRes" style="display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #E2E8F0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:9999;max-height:200px;overflow-y:auto;"></div>
+        </div>
+        <div id="npCIDSel" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;"></div>
+        <input type="hidden" id="npCID">
+      </div>
+      <div class="fld ff"><label>Convenio</label><input id="npConvenio" placeholder="Particular, Unimed, Hapvida..."></div>
+    </div>
+    <div style="display:flex;gap:7px;justify-content:flex-end;">
+      <button class="btn bo" onclick="cm('m-novo-paciente')">Cancelar</button>
+      <button class="btn bp" id="btnCriarPaciente" onclick="criarPaciente()"><i class="ti ti-check"></i> Criar paciente</button>
+    </div>
+  </div>
+</div>
+
+<div class="mo" id="m-novo-responsavel" style="display:none;" onclick="if(event.target===this)cm('m-novo-responsavel')">
+  <div class="mb">
+    <div class="mt2">Novo responsavel <span onclick="cm('m-novo-responsavel')" style="cursor:pointer;color:#94A3B8;float:right"><i class="ti ti-x"></i></span></div>
+    <div class="fg2" style="margin-bottom:13px;">
+      <div class="fld ff"><label>Nome completo *</label><input id="nrNome"></div>
+      <div class="fld"><label>Parentesco</label>
+        <select id="nrParentesco"><option value="mae">Mae</option><option value="pai">Pai</option><option value="avo_materna">Avo materna</option><option value="avo_paterna">Avo paterna</option><option value="tutor">Tutor(a)</option><option value="outro">Outro</option></select>
+      </div>
+      <div class="fld"><label>Telefone</label><input id="nrTelefone" placeholder="(11) 99999-9999"></div>
+      <div class="fld"><label>E-mail</label><input type="email" id="nrEmail"></div>
+      <div class="fld"><label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="nrPrincipal" style="width:auto"> Responsavel principal</label></div>
+    </div>
+    <div style="display:flex;gap:7px;justify-content:flex-end;">
+      <button class="btn bo" onclick="cm('m-novo-responsavel')">Cancelar</button>
+      <button class="btn bp" onclick="criarResponsavel()"><i class="ti ti-check"></i> Adicionar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- scripts movidos para head -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
